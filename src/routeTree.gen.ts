@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TopicNewIndexRouteImport } from './routes/topic/new/index'
+import { Route as TopicTopicIdIndexRouteImport } from './routes/topic/$topicId/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TopicNewIndexRoute = TopicNewIndexRouteImport.update({
+  id: '/topic/new/',
+  path: '/topic/new/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TopicTopicIdIndexRoute = TopicTopicIdIndexRouteImport.update({
+  id: '/topic/$topicId/',
+  path: '/topic/$topicId/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/topic/$topicId': typeof TopicTopicIdIndexRoute
+  '/topic/new': typeof TopicNewIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/topic/$topicId': typeof TopicTopicIdIndexRoute
+  '/topic/new': typeof TopicNewIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/topic/$topicId/': typeof TopicTopicIdIndexRoute
+  '/topic/new/': typeof TopicNewIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/topic/$topicId' | '/topic/new'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/topic/$topicId' | '/topic/new'
+  id: '__root__' | '/' | '/topic/$topicId/' | '/topic/new/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  TopicTopicIdIndexRoute: typeof TopicTopicIdIndexRoute
+  TopicNewIndexRoute: typeof TopicNewIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/topic/new/': {
+      id: '/topic/new/'
+      path: '/topic/new'
+      fullPath: '/topic/new'
+      preLoaderRoute: typeof TopicNewIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/topic/$topicId/': {
+      id: '/topic/$topicId/'
+      path: '/topic/$topicId'
+      fullPath: '/topic/$topicId'
+      preLoaderRoute: typeof TopicTopicIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  TopicTopicIdIndexRoute: TopicTopicIdIndexRoute,
+  TopicNewIndexRoute: TopicNewIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
