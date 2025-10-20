@@ -13,8 +13,11 @@ type RouterContext = {
 }
 
 export const Route = createRootRouteWithContext<RouterContext>()({
-  component: RootLayout,
-  notFoundComponent: NotFound
+    head: () => ({
+        meta: [{ title: 'Jarro - Forum' },]
+    }),
+    component: RootLayout,
+    notFoundComponent: NotFound
 })
 
 function RootLayout(){
