@@ -1,4 +1,4 @@
-export type Topic = {
+export type Post = {
     id: string
     title: string
     summary: string
