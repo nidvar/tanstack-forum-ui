@@ -36,6 +36,7 @@ function RouteComponent() {
                         )
                     })}
                 </div>
+                <Link to='/'>HOME</Link>
             </div>
         </>
     )
