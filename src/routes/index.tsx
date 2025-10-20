@@ -6,7 +6,7 @@ export const Route = createFileRoute('/')({
 
 function App() {
   return (
-    <div className="text-center bg-red-50">
+    <div className='main'>
       <h1>Forum</h1>
       <Link to='/posts'>Posts</Link>
     </div>

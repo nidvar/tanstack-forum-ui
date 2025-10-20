@@ -54,3 +54,26 @@ h3 {
     align-self: start;
     width: auto;
 }
+
+/* header */
+
+.my-header {
+    border-bottom: 1px solid grey;
+}
+
+.my-inner-header {
+    max-width: 1600px;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    padding: 10px 0;
+}
+
+.my-nav ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+.my-nav li {
+    margin: 0 15px;
+}

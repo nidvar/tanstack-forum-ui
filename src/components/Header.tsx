@@ -1,9 +1,19 @@
+import { Link } from '@tanstack/react-router';
+
 const Header = function(){
     return(
         <>
-            <div>
-                <h1>Header</h1>
-            </div>
+            <header className="my-header">
+                <div className="my-inner-header">
+                    <div className="my-logo"><Link to="/">Home</Link></div>
+                    <nav className="my-nav">
+                        <ul>
+                            <li><Link to="/">Logout</Link></li>
+                            <li><Link to="/">Login</Link></li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
         </>
     )
 };
