@@ -36,7 +36,9 @@ function RouteComponent() {
                         )
                     })}
                 </div>
-                <Link to='/'>HOME</Link>
+                <div className='my-flex'>
+                    <Link to='/' className='link-button'>HOME</Link>
+                </div>
             </div>
         </>
     )

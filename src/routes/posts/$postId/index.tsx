@@ -36,7 +36,9 @@ function PostDetailsPage() {
                 <h1>{topic.title}</h1>
                 <h3>{topic.summary}</h3>
                 <p>{topic.description}</p>
-                <Link to='/posts' className='link-button'>Back</Link>
+                <div className='my-flex'>
+                    <Link to='/posts' className='link-button'>BACK</Link>
+                </div>
             </div>
         </>
     )
