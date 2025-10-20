@@ -8,3 +8,22 @@
     font-weight: 400;
     font-style: normal;
 }
+
+h1 {
+    font-size: 32px;
+    font-weight: 600;
+    text-align: center;
+    margin: 15px;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.main {
+    border: 1px solid black;
+    max-width: 1200px;
+    padding: 15px;
+    margin: 15px auto;
+}

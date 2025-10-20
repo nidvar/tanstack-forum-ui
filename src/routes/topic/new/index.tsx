@@ -1,9 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/topic/new/')({
-  component: NewTopicPage,
+    head: ()=> ({
+        meta: [{title: 'Jarro - Forum'},]
+    }), 
+    component: NewTopicPage,
 })
 
 function NewTopicPage() {
-  return <div>Hello "/topic/"!</div>
+    return <div>New Topic</div>
 }
