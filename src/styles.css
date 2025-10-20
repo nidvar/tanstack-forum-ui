@@ -27,3 +27,19 @@ h3 {
     padding: 15px;
     margin: 15px auto;
 }
+
+.topic-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.link-button {
+    border: none;
+    background-color: #6068f3;
+    color: white;
+    padding: 6px;
+    border-radius: 4px;
+    margin: 15px 0;
+    align-self: start;
+    width: auto;
+}

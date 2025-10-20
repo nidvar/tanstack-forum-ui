@@ -37,10 +37,11 @@ function TopicDetailsPage() {
     const {data: topic} = useSuspenseQuery(topicQueryOptions(topicId))
     return (
         <>
-            <div className='main'>
+            <div className='main topic-details'>
                 <h1>{topic.title}</h1>
                 <h3>{topic.summary}</h3>
                 <p>{topic.description}</p>
+                <Link to='/' className='link-button'>Back Home</Link>
             </div>
         </>
     )
