@@ -29,7 +29,7 @@ export const Route = createFileRoute('/posts/$postId/')({
 
 function PostDetailsPage() {
     const { postId } = Route.useParams();
-    const {data: topic} = useSuspenseQuery(postQueryOptions(postId))
+    const {data: topic} = useSuspenseQuery(postQueryOptions(postId));
     return (
         <>
             <div className='main post-details'>
