@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { useState, useEffect } from 'react';
 
-import axiosAPI from '../../lib/axios';
+import {allPosts} from '../../lib/axios';
 
 import type {Post} from '../../types';
 
@@ -14,13 +14,13 @@ export const Route = createFileRoute('/posts/')({
 function RouteComponent() {
     const [posts, setPosts] = useState<Post[]>([]);
 
-    const grabData = async function(){
-        const res = await axiosAPI.get('/posts');
-        setPosts(res.data);
+    const loadPosts = async function(){
+        const posts = await allPosts();
+        setPosts(posts);
     }
 
     useEffect(()=>{
-        grabData();
+        loadPosts();
     }, [])
 
     return (

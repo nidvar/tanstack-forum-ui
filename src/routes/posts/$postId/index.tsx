@@ -1,19 +1,12 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
 
-import type { Post } from '../../../types';
-
-import axiosAPI from '../../../lib/axios';
-
-const fetchPost = async function(postId: string): Promise<Post>{
-    const res = await axiosAPI.get(`posts/${postId}`);
-    return res.data;
-}
+import {singlePost} from '../../../lib/axios';
 
 const postQueryOptions = function(postId: string){
     return queryOptions({
         queryKey: ['post', postId],
-        queryFn: function(){return fetchPost(postId)}
+        queryFn: function(){return singlePost(postId)}
     })
 }
 
