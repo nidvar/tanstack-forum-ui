@@ -18,6 +18,8 @@ function RouteComponent() {
     const [tags, setTags] = useState('');
     const [content, setContent] = useState('');
 
+    const [disableButton, setDisableButton] = useState(false);
+
     const handleSubmit = function(e: React.FormEvent<HTMLFormElement>){
         e.preventDefault();
 
@@ -39,6 +41,7 @@ function RouteComponent() {
         };
         editPost(formData, postId);
         navigate({ to: '/posts' });
+        setDisableButton(true);
     }
 
     const getPost = async function(){
@@ -50,6 +53,7 @@ function RouteComponent() {
     }
 
     useEffect(()=>{
+        setDisableButton(false);
         getPost();
     }, []);
 
@@ -107,7 +111,7 @@ function RouteComponent() {
                         onChange={function(e){setTags(e.target.value)}}
                     />
 
-                    <button className='button margin-top'>EDIT</button>
+                    <button className='button margin-top' disabled={disableButton}>EDIT</button>
                 </form>
             </div>
         </>

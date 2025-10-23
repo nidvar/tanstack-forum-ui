@@ -20,7 +20,7 @@ export const createNewPost = async function(newPost: NewPost): Promise<Post>{
             createdAt: new Date().toISOString()
         } 
     );
-    return res.data
+    return res.data;
 }
 
 export const deletePost = async function(postId: string): Promise<void>{

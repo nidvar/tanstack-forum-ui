@@ -1,6 +1,7 @@
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
 
+import { useState } from 'react'
 
 import {singlePost, deletePost} from '../../../api/posts';
 
@@ -23,12 +24,22 @@ export const Route = createFileRoute('/posts/$postId/')({
 
 function PostDetailsPage() {
     const navigate = useNavigate();
+
+    const [disable, setDisable] = useState(false);
+
     const { postId } = Route.useParams();
     const {data: post} = useSuspenseQuery(postQueryOptions(postId));
 
-    const postDelete = function(id: string){
-        deletePost(id);
-        navigate({ to: '/posts' });
+    const postDelete = async function(id: string){
+        setDisable(true);
+        try{
+            deletePost(id);
+            await navigate({ to: '/posts' });
+        }catch(error){
+            console.log(error);
+        }finally{
+            setDisable(false);
+        }
     };
 
     const editPost = function(id: string){
@@ -44,7 +55,7 @@ function PostDetailsPage() {
                 <p>{post.description}</p>
                 <div className='my-flex-start'>
                     <button className='button margin-top' onClick={function(){editPost(post.id)}}>EDIT</button>
-                    <button className='button red-bg margin-top margin-left' onClick={function(){postDelete(post.id)}}>DELETE</button>
+                    <button className='button red-bg margin-top margin-left' onClick={function(){postDelete(post.id)}} disabled={disable}>DELETE</button>
                 </div>
             </div>
         </>

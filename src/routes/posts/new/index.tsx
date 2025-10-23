@@ -18,9 +18,11 @@ function NewPostPage() {
     const [tags, setTags] = useState('');
     const [content, setContent] = useState('');
 
-    const handleSubmit = function(e: React.FormEvent<HTMLFormElement>){
-        e.preventDefault();
+    const [disable, setDisable] = useState(false);
 
+    const handleSubmit = async function(e: React.FormEvent<HTMLFormElement>){
+        e.preventDefault();
+        setDisable(true);
         const tagsArray: string[] = [];
 
         if(title.trim() == '' || summary.trim() == '' || content.trim() == ''){
@@ -38,8 +40,16 @@ function NewPostPage() {
             description: content,
             tags: [...tagsArray]
         };
-        createNewPost(formData);
-        navigate({ to: '/posts' });
+
+        try{
+            await createNewPost(formData);
+            navigate({ to: '/posts' });
+        }catch(error){
+            console.log(error)
+        }finally{
+            setDisable(false)
+        }
+        
     }
 
     return (
@@ -95,7 +105,7 @@ function NewPostPage() {
                         onChange={function(e){setTags(e.target.value)}}
                     />
 
-                    <button className='button margin-top'>CREATE</button>
+                    <button className='button margin-top' disabled={disable}>CREATE</button>
                 </form>
             </div>
         </>
