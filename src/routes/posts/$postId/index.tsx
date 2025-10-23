@@ -38,8 +38,8 @@ function PostDetailsPage() {
                 <h1>{post.title}</h1>
                 <h3>{post.summary}</h3>
                 <p>{post.description}</p>
-                <div className='my-flex'>
-                    <button className='link-button red-bg' onClick={function(){postDelete(post.id)}}>DELETE</button>
+                <div className='my-flex-start'>
+                    <button className='button red-bg margin-top' onClick={function(){postDelete(post.id)}}>DELETE</button>
                 </div>
             </div>
         </>

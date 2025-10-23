@@ -27,14 +27,14 @@ function App() {
     return (
         <div className='main'>
             <h1>Forum</h1>
-            <p className='center'>Latest posts</p>
+            <p className='center'>React | TypeScript | Node | MongoDB</p>
             <div className='posts-list'>
                 {displayPosts.map((item)=>{
                     return(
                         <PostCard post={item} key={item.id} link={'./posts/' + item.id} />
                     )
                 })}
-                <Link to='/posts' className='center link-button'>View All Posts</Link>
+                <Link to='/posts' className='center button'>View All Posts</Link>
             </div>
         </div>
     )

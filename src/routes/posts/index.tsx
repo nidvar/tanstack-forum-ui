@@ -27,15 +27,13 @@ function RouteComponent() {
         <>
             <div className='main'>
                 <h1>Posts</h1>
+                <Link to='/' className='blue underline center'>{'<-'} Back home</Link>
                 <div className='posts-list-column'>
                     {posts.map((item)=>{
                         return(
                             <PostCard post={item} key={item.id} link={'./' + item.id}/>
                         )
                     })}
-                </div>
-                <div className='my-flex'>
-                    <Link to='/' className='link-button'>HOME</Link>
                 </div>
             </div>
         </>

@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import {createNewPost} from '../../../api/posts'
 
@@ -95,7 +95,7 @@ function NewPostPage() {
                         onChange={function(e){setTags(e.target.value)}}
                     />
 
-                    <button className='normal-button'>CREATE</button>
+                    <button className='button margin-top'>CREATE</button>
                 </form>
             </div>
         </>
