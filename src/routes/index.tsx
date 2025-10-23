@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { useState, useEffect } from 'react';
-import {allPosts} from '../lib/axios';
+import {allPosts} from '../api/posts';
 
 import type {Post} from '../types';
 
@@ -36,7 +36,6 @@ function App() {
                 })}
                 <Link to='/posts' className='center link-button'>View All Posts</Link>
             </div>
-            
         </div>
     )
 }

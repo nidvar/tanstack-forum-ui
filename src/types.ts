@@ -7,3 +7,10 @@ export type Post = {
     createdAt: string
     user: string
 }
+
+export type NewPost = {
+    title: string
+    summary: string
+    description: string
+    tags: string[]
+}

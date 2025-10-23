@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { useState, useEffect } from 'react';
 
-import {allPosts} from '../../lib/axios';
+import {allPosts} from '../../api/posts';
 
 import type {Post} from '../../types';
 

@@ -2,6 +2,8 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { useState, useEffect } from 'react';
 
+import {createNewPost} from '../../../api/posts'
+
 export const Route = createFileRoute('/posts/new/')({
     head: ()=> ({
         meta: [{title: 'Jarro - Forum'},]
@@ -32,11 +34,10 @@ function NewPostPage() {
         const formData = {
             title,
             summary,
-            content,
+            description: content,
             tags: [...tagsArray]
         };
-
-        console.log(formData);
+        createNewPost(formData);
     }
 
     return (

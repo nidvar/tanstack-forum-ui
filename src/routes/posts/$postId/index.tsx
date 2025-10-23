@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
 
-import {singlePost} from '../../../lib/axios';
+import {singlePost} from '../../../api/posts';
 
 const postQueryOptions = function(postId: string){
     return queryOptions({
