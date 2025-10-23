@@ -26,3 +26,12 @@ export const createNewPost = async function(newPost: NewPost): Promise<Post>{
 export const deletePost = async function(postId: string): Promise<void>{
     await axiosAPI.delete(`posts/${postId}`);
 }
+
+export const editPost = async function(newPost: NewPost): Promise<Post>{
+    const res = await axiosAPI.put('/posts', {
+            ...newPost,
+            createdAt: new Date().toISOString()
+        } 
+    );
+    return res.data;
+}

@@ -31,6 +31,10 @@ function PostDetailsPage() {
         navigate({ to: '/posts' });
     };
 
+    const editPost = function(id: string){
+        navigate({ to: `/posts/$postId/edit`, params:{ postId: id } });
+    }
+
     return (
         <>
             <div className='main post-details'>
@@ -39,7 +43,8 @@ function PostDetailsPage() {
                 <h3>{post.summary}</h3>
                 <p>{post.description}</p>
                 <div className='my-flex-start'>
-                    <button className='button red-bg margin-top' onClick={function(){postDelete(post.id)}}>DELETE</button>
+                    <button className='button margin-top' onClick={function(){editPost(post.id)}}>EDIT</button>
+                    <button className='button red-bg margin-top margin-left' onClick={function(){postDelete(post.id)}}>DELETE</button>
                 </div>
             </div>
         </>
