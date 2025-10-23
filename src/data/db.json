@@ -73,16 +73,16 @@
       "createdAt": "2025-04-24T13:10:00.000Z"
     },
     {
-      "id": "d904",
-      "title": "israel",
-      "summary": "war in gaza",
+      "title": "Israel",
+      "summary": "War in Gaza",
       "description": "israel has pummelled gaza to the stone age",
       "tags": [
         "war",
         " news",
         " politics"
       ],
-      "createdAt": "2025-10-23T03:34:10.502Z"
+      "createdAt": "2025-10-23T05:31:23.328Z",
+      "id": "d904"
     }
   ]
 }

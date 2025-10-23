@@ -20,7 +20,7 @@ function RouteComponent() {
 
     const handleSubmit = function(e: React.FormEvent<HTMLFormElement>){
         e.preventDefault();
-        return;
+
         const tagsArray: string[] = [];
         if(title.trim() == '' || summary.trim() == '' || content.trim() == ''){
             return;
@@ -37,7 +37,7 @@ function RouteComponent() {
             description: content,
             tags: [...tagsArray]
         };
-        editPost(formData);
+        editPost(formData, postId);
         navigate({ to: '/posts' });
     }
 
