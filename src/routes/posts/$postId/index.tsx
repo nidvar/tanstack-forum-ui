@@ -29,13 +29,13 @@ export const Route = createFileRoute('/posts/$postId/')({
 
 function PostDetailsPage() {
     const { postId } = Route.useParams();
-    const {data: topic} = useSuspenseQuery(postQueryOptions(postId));
+    const {data: post} = useSuspenseQuery(postQueryOptions(postId));
     return (
         <>
             <div className='main post-details'>
-                <h1>{topic.title}</h1>
-                <h3>{topic.summary}</h3>
-                <p>{topic.description}</p>
+                <h1>{post.title}</h1>
+                <h3>{post.summary}</h3>
+                <p>{post.description}</p>
                 <div className='my-flex'>
                     <Link to='/posts' className='link-button'>BACK</Link>
                 </div>
