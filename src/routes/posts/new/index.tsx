@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
 
 import { useState, useEffect } from 'react';
 
@@ -12,6 +12,7 @@ export const Route = createFileRoute('/posts/new/')({
 })
 
 function NewPostPage() {
+    const navigate = useNavigate();
     const [title, setTitle] = useState('');
     const [summary, setSummary] = useState('');
     const [tags, setTags] = useState('');
@@ -22,7 +23,7 @@ function NewPostPage() {
 
         const tagsArray: string[] = [];
 
-        if(title == '' || summary == '' || content == ''){
+        if(title.trim() == '' || summary.trim() == '' || content.trim() == ''){
             return;
         }
         if(tags != ''){
@@ -38,6 +39,7 @@ function NewPostPage() {
             tags: [...tagsArray]
         };
         createNewPost(formData);
+        navigate({ to: '/posts' });
     }
 
     return (

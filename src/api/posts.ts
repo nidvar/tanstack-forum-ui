@@ -20,7 +20,9 @@ export const createNewPost = async function(newPost: NewPost): Promise<Post>{
             createdAt: new Date().toISOString()
         } 
     );
-
-    console.log(res.data);
     return res.data
+}
+
+export const deletePost = async function(postId: string): Promise<void>{
+    const res = await axiosAPI.delete(`posts/${postId}`);
 }

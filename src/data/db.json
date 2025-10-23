@@ -73,14 +73,16 @@
       "createdAt": "2025-04-24T13:10:00.000Z"
     },
     {
-      "id": "6bc4",
-      "title": "thor",
-      "summary": "god of thunder",
-      "description": "i liked his movies",
+      "id": "d904",
+      "title": "israel",
+      "summary": "war in gaza",
+      "description": "israel has pummelled gaza to the stone age",
       "tags": [
-        "movies"
+        "war",
+        " news",
+        " politics"
       ],
-      "createdAt": "2025-10-23T02:34:47.702Z"
+      "createdAt": "2025-10-23T03:34:10.502Z"
     }
   ]
 }
