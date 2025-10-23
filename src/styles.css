@@ -21,11 +21,37 @@ h3 {
     font-weight: 600;
 }
 
+textarea {
+    height: 150px;
+}
+
+button {
+    cursor: pointer;
+}
+
 .main {
     max-width: 1200px;
     padding: 15px;
     margin: 15px auto;
 }
+
+/* forms */
+
+.new-post-form {
+    width: 600px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.new-post-form input, .new-post-form textarea{
+    border: 1px solid grey;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+/* post */
 
 .posts-list {
     width: 600px;
@@ -51,6 +77,8 @@ h3 {
     flex-direction: column;
 }
 
+/* utils */
+
 .link-button {
     border: none;
     background-color: #6068f3;
@@ -60,6 +88,16 @@ h3 {
     margin: 15px;
     align-self: start;
     width: auto;
+}
+
+.normal-button {
+    border: none;
+    background-color: #1e8321;
+    color: white;
+    padding: 6px;
+    border-radius: 4px;
+    width: 100%;
+    margin: 15px 0;
 }
 
 /* header */
