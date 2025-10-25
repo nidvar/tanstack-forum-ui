@@ -1,8 +1,7 @@
 export type Post = {
-    id: string
+    _id: string
     title: string
-    summary: string
-    description: string
+    content: string
     tags: string[]
     createdAt: string
     user: string
@@ -10,7 +9,6 @@ export type Post = {
 
 export type NewPost = {
     title: string
-    summary: string
-    description: string
+    content: string
     tags: string[]
 }

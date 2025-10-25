@@ -31,7 +31,7 @@ function App() {
             <div className='posts-list'>
                 {displayPosts.map((item)=>{
                     return(
-                        <PostCard post={item} key={item.id} link={'./posts/' + item.id} />
+                        <PostCard post={item} key={item._id} link={'./posts/' + item._id} />
                     )
                 })}
                 <Link to='/posts' className='center button'>View All Posts</Link>

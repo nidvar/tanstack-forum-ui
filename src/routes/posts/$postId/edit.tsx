@@ -14,7 +14,6 @@ function RouteComponent() {
     const { postId } = Route.useParams();
 
     const [title, setTitle] = useState('');
-    const [summary, setSummary] = useState('');
     const [tags, setTags] = useState('');
     const [content, setContent] = useState('');
 
@@ -24,7 +23,7 @@ function RouteComponent() {
         e.preventDefault();
 
         const tagsArray: string[] = [];
-        if(title.trim() == '' || summary.trim() == '' || content.trim() == ''){
+        if(title.trim() == '' || content.trim() == ''){
             return;
         }
         if(tags != ''){
@@ -35,8 +34,7 @@ function RouteComponent() {
         }
         const formData = {
             title,
-            summary,
-            description: content,
+            content,
             tags: [...tagsArray]
         };
         editPost(formData, postId);
@@ -47,8 +45,7 @@ function RouteComponent() {
     const getPost = async function(){
         const post = await singlePost(postId);
         setTitle(post.title);
-        setSummary(post.summary);
-        setContent(post.description);
+        setContent(post.content);
         setTags(post.tags.join(','));
     }
 
@@ -73,18 +70,6 @@ function RouteComponent() {
                         type='text'
                         value={title}
                         onChange={function(e){setTitle(e.target.value)}}
-                    />
-
-                    <label
-                        htmlFor='summary'
-                    >
-                        Summary
-                    </label>
-                    <input
-                        id='summary'
-                        type='text'
-                        value={summary}
-                        onChange={function(e){setSummary(e.target.value)}}
                     />
 
                     <label

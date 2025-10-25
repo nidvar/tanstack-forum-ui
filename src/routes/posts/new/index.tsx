@@ -14,7 +14,6 @@ export const Route = createFileRoute('/posts/new/')({
 function NewPostPage() {
     const navigate = useNavigate();
     const [title, setTitle] = useState('');
-    const [summary, setSummary] = useState('');
     const [tags, setTags] = useState('');
     const [content, setContent] = useState('');
 
@@ -25,7 +24,7 @@ function NewPostPage() {
         setDisable(true);
         const tagsArray: string[] = [];
 
-        if(title.trim() == '' || summary.trim() == '' || content.trim() == ''){
+        if(title.trim() == '' || content.trim() == ''){
             return;
         }
         if(tags != ''){
@@ -36,20 +35,21 @@ function NewPostPage() {
         }
         const formData = {
             title,
-            summary,
-            description: content,
+            content,
             tags: [...tagsArray]
         };
+
+        console.log(formData);
 
         try{
             await createNewPost(formData);
             navigate({ to: '/posts' });
         }catch(error){
-            console.log(error)
+            console.log('Error ==> ',error)
         }finally{
             setDisable(false)
         }
-        
+
     }
 
     return (
@@ -67,18 +67,6 @@ function NewPostPage() {
                         type='text'
                         value={title}
                         onChange={function(e){setTitle(e.target.value)}}
-                    />
-
-                    <label
-                        htmlFor='summary'
-                    >
-                        Summary
-                    </label>
-                    <input
-                        id='summary'
-                        type='text'
-                        value={summary}
-                        onChange={function(e){setSummary(e.target.value)}}
                     />
 
                     <label

@@ -31,7 +31,7 @@ function RouteComponent() {
                 <div className='posts-list-column'>
                     {posts.map((item)=>{
                         return(
-                            <PostCard post={item} key={item.id} link={'./' + item.id}/>
+                            <PostCard post={item} key={item._id} link={'./' + item._id}/>
                         )
                     })}
                 </div>

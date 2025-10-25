@@ -51,11 +51,10 @@ function PostDetailsPage() {
             <div className='main post-details'>
                 <Link to='/posts' className='blue underline'>{'<-'} Back to posts</Link>
                 <h1>{post.title}</h1>
-                <h3>{post.summary}</h3>
-                <p>{post.description}</p>
+                <h3>{post.content}</h3>
                 <div className='my-flex-start'>
-                    <button className='button margin-top' onClick={function(){editPost(post.id)}}>EDIT</button>
-                    <button className='button red-bg margin-top margin-left' onClick={function(){postDelete(post.id)}} disabled={disable}>DELETE</button>
+                    <button className='button margin-top' onClick={function(){editPost(post._id)}}>EDIT</button>
+                    <button className='button red-bg margin-top margin-left' onClick={function(){postDelete(post._id)}} disabled={disable}>DELETE</button>
                 </div>
             </div>
         </>

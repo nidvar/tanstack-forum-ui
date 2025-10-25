@@ -1,4 +1,4 @@
-import type { Post, NewPost } from '../types'
+import type { Post, NewPost } from '../types';
 import axiosAPI from "@/lib/axios";
 
 export const singlePost = async function(postId: string): Promise<Post>{
@@ -13,8 +13,6 @@ export const allPosts = async function(): Promise<Post[]>{
 }
 
 export const createNewPost = async function(newPost: NewPost): Promise<Post>{
-    console.log(newPost);
-    
     const res = await axiosAPI.post('/posts', {
             ...newPost,
             createdAt: new Date().toISOString()
