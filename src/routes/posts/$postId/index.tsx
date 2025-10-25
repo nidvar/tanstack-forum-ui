@@ -1,5 +1,6 @@
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
+import { FaTrash, FaPenToSquare } from "react-icons/fa6";
 
 import { useState } from 'react'
 
@@ -50,11 +51,31 @@ function PostDetailsPage() {
         <>
             <div className='main post-details'>
                 <Link to='/posts' className='blue underline'>{'<-'} Back to posts</Link>
-                <h1>{post.title}</h1>
-                <h3>{post.content}</h3>
-                <div className='my-flex-start'>
-                    <button className='button margin-top' onClick={function(){editPost(post._id)}}>EDIT</button>
-                    <button className='button red-bg margin-top margin-left' onClick={function(){postDelete(post._id)}} disabled={disable}>DELETE</button>
+                <div className='post-header'>
+                    <div className='profile-icon'>
+                        <p>PP</p>
+                    </div>
+                    <div>
+                        <p>
+                            <span className='post-tags'>{post.tags.map((item)=> item)}</span>
+                            <span className='post-time'> - {post.createdAt}</span>
+                        </p>
+                        <p className='post-username'>{post.username}</p>
+                    </div>
+                </div>
+                
+                <div className='post-title-header'>
+                    <h2>{post.title}</h2>
+                    
+                </div>
+                <p className='post-content'>{post.content}</p>
+                <div className='my-flex-end'>
+                    <button className='margin-top' onClick={function(){editPost(post._id)}}>
+                        <FaPenToSquare size={24} />
+                    </button>
+                    <button className='margin-top ml-l' onClick={function(){postDelete(post._id)}} disabled={disable}>
+                        <FaTrash size={24} />
+                    </button>
                 </div>
             </div>
         </>

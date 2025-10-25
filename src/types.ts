@@ -4,7 +4,7 @@ export type Post = {
     content: string
     tags: string[]
     createdAt: string
-    user: string
+    username: string
 }
 
 export type NewPost = {

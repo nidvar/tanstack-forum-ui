@@ -26,7 +26,7 @@ export const deletePost = async function(postId: string): Promise<void>{
 }
 
 export const editPost = async function(newPost: NewPost, id: string): Promise<Post>{
-    const res = await axiosAPI.put(`/posts/${id}/`, {
+    const res = await axiosAPI.put(`/posts/${id}`, {
             ...newPost,
             createdAt: new Date().toISOString()
         } 

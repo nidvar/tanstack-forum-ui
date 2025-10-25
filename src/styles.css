@@ -16,6 +16,12 @@ h1 {
     margin: 15px;
 }
 
+h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 15px 0;
+}
+
 h3 {
     font-size: 18px;
     font-weight: 600;
@@ -53,6 +59,39 @@ button {
 
 /* post */
 
+.post-username, .post-tags {
+    font-weight: 300;
+    font-size: 14px;
+    color: grey;
+}
+
+.post-time {
+    font-weight: 300;
+    font-size: 12px;
+    color: grey;
+}
+
+.post-tags {
+    font-weight: 300;
+    font-size: 12px;
+    color: black;
+    background-color: rgb(229, 229, 229);
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.post-header {
+    display: flex;
+}
+
+.profile-icon {
+    border: 1px solid black;
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
 .posts-list {
     width: 600px;
     margin: auto;
@@ -77,6 +116,24 @@ button {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 800px;
+}
+
+.post-title-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.post-title-dropdown:hover{
+    cursor: pointer;
+    background-color: rgb(217, 217, 217);
+    border-radius: 50%;
+    padding: 2px 6px;
+}
+
+.post-content {
+    min-height: 200px;
 }
 
 /* utils */
@@ -85,7 +142,7 @@ button {
     border: none;
     background-color: #0d6efd;
     color: white;
-    padding: 6px;
+    padding: 2px 6px;
     border-radius: 4px;
 }
 
@@ -124,6 +181,11 @@ button {
     justify-content: start;
 }
 
+.my-flex-end {
+    display: flex;
+    justify-content: end;
+}
+
 .blue {
     color:#0d6efd;
 }
@@ -142,4 +204,12 @@ button {
 
 .margin-left {
     margin-left: 10px;
+}
+
+.font-24 {
+    font-size: 24px;
+}
+
+.ml-l {
+    margin-left: 20px;
 }
