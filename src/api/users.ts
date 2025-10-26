@@ -8,3 +8,9 @@ export const registerUser = async function(user: User){
     console.log(res.data);
     return res.data;
 };
+
+export const login = async function(user: {email: string, password: string}){
+    console.log(user);
+    const res = await axiosAPI.post('login', user);
+    return res.data;
+}
