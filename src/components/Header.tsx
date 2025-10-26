@@ -10,7 +10,7 @@ const Header = function(){
                         <ul>
                             <li><Link to='/posts/new'>Create</Link></li>
                             <li><Link to="/">Logout</Link></li>
-                            <li><Link to="/">Login</Link></li>
+                            <li><Link to="/login">Login</Link></li>
                         </ul>
                     </nav>
                 </div>

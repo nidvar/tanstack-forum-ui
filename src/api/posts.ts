@@ -13,7 +13,7 @@ export const allPosts = async function(): Promise<Post[]>{
 }
 
 export const createNewPost = async function(newPost: NewPost): Promise<Post>{
-    const res = await axiosAPI.post('/posts', {
+    const res = await axiosAPI.post('posts', {
             ...newPost,
             createdAt: new Date().toISOString()
         } 
@@ -26,7 +26,7 @@ export const deletePost = async function(postId: string): Promise<void>{
 }
 
 export const editPost = async function(newPost: NewPost, id: string): Promise<Post>{
-    const res = await axiosAPI.put(`/posts/${id}`, {
+    const res = await axiosAPI.put(`posts/${id}`, {
             ...newPost,
             createdAt: new Date().toISOString()
         } 

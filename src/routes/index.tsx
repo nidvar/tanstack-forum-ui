@@ -27,7 +27,7 @@ function App() {
     return (
         <div className='main'>
             <h1>Forum</h1>
-            <p className='center'>React | TypeScript | Node | MongoDB</p>
+            <p className='center'>React | TypeScript | Node | MongoDB | JWT</p>
             <div className='posts-list'>
                 {displayPosts.map((item)=>{
                     return(

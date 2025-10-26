@@ -12,3 +12,9 @@ export type NewPost = {
     content: string
     tags: string[]
 }
+
+export type User = {
+    username: string
+    email: string
+    password: string
+}
