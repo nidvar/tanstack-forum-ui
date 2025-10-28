@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RegisterIndexRouteImport } from './routes/register/index'
 import { Route as PostsIndexRouteImport } from './routes/posts/index'
+import { Route as LogoutIndexRouteImport } from './routes/logout/index'
 import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as PostsNewIndexRouteImport } from './routes/posts/new/index'
 import { Route as PostsPostIdIndexRouteImport } from './routes/posts/$postId/index'
@@ -30,6 +31,11 @@ const RegisterIndexRoute = RegisterIndexRouteImport.update({
 const PostsIndexRoute = PostsIndexRouteImport.update({
   id: '/posts/',
   path: '/posts/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LogoutIndexRoute = LogoutIndexRouteImport.update({
+  id: '/logout/',
+  path: '/logout/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginIndexRoute = LoginIndexRouteImport.update({
@@ -56,6 +62,7 @@ const PostsPostIdEditRoute = PostsPostIdEditRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginIndexRoute
+  '/logout': typeof LogoutIndexRoute
   '/posts': typeof PostsIndexRoute
   '/register': typeof RegisterIndexRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginIndexRoute
+  '/logout': typeof LogoutIndexRoute
   '/posts': typeof PostsIndexRoute
   '/register': typeof RegisterIndexRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
@@ -75,6 +83,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/login/': typeof LoginIndexRoute
+  '/logout/': typeof LogoutIndexRoute
   '/posts/': typeof PostsIndexRoute
   '/register/': typeof RegisterIndexRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
@@ -86,6 +95,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/login'
+    | '/logout'
     | '/posts'
     | '/register'
     | '/posts/$postId/edit'
@@ -95,6 +105,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/login'
+    | '/logout'
     | '/posts'
     | '/register'
     | '/posts/$postId/edit'
@@ -104,6 +115,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/login/'
+    | '/logout/'
     | '/posts/'
     | '/register/'
     | '/posts/$postId/edit'
@@ -114,6 +126,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LoginIndexRoute: typeof LoginIndexRoute
+  LogoutIndexRoute: typeof LogoutIndexRoute
   PostsIndexRoute: typeof PostsIndexRoute
   RegisterIndexRoute: typeof RegisterIndexRoute
   PostsPostIdEditRoute: typeof PostsPostIdEditRoute
@@ -142,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/posts'
       fullPath: '/posts'
       preLoaderRoute: typeof PostsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/logout/': {
+      id: '/logout/'
+      path: '/logout'
+      fullPath: '/logout'
+      preLoaderRoute: typeof LogoutIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login/': {
@@ -178,6 +198,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoginIndexRoute: LoginIndexRoute,
+  LogoutIndexRoute: LogoutIndexRoute,
   PostsIndexRoute: PostsIndexRoute,
   RegisterIndexRoute: RegisterIndexRoute,
   PostsPostIdEditRoute: PostsPostIdEditRoute,

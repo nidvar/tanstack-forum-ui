@@ -2,7 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router';
 
 import { useState } from 'react';
 
-import { registerUser } from '../../api/users';
+import { registerUser } from '../../api/auth';
 
 export const Route = createFileRoute('/register/')({
     component: RouteComponent,

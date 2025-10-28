@@ -1,14 +1,16 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
 
 import { useState } from 'react';
 
-import { login } from '../../api/users';
+import { login } from '../../api/auth';
 
 export const Route = createFileRoute('/login/')({
     component: RouteComponent,
 })
 
 function RouteComponent() {
+
+    const navigate = useNavigate();
 
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -32,7 +34,13 @@ function RouteComponent() {
         };
 
         try {
-            login(userData);
+            const result = await login(userData);
+
+            if(result.error){
+                setErrorMessage(result.error);
+            }else{
+                navigate({ to: '/' });
+            }
         } catch (error) {
             console.log('login error ===>', error)
         } finally {
@@ -69,6 +77,7 @@ function RouteComponent() {
                         onChange={function (e) { setPassword(e.target.value), handleChange() }}
                     />
                     <button className='button margin-top' disabled={disable}>LOGIN</button>
+                    <Link to='/register' className='blue underline center'>Create new account</Link>
                     <p className='error'>{errorMessage}</p>
                 </form>
             </div>

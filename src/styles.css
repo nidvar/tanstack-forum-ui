@@ -41,6 +41,17 @@ button {
     margin: 15px auto;
 }
 
+.logout-page {
+    width: 600px;
+    height: 600px;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
 /* forms */
 
 .new-post-form {
