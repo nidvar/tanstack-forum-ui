@@ -1,8 +1,23 @@
 import { Link } from '@tanstack/react-router';
 
-import { logout } from '../api/auth';
+import { useState, useEffect } from 'react';
+
+import { logout, authMe } from '../api/auth';
 
 const Header = function(){
+
+    const [loggedIn, setLoggedIn] = useState(false);
+
+    useEffect(()=>{
+        async function auth(){
+            const data =  await authMe();
+            if(data.user != null){
+                setLoggedIn(true);
+            }
+        }
+        auth();
+    }, []);
+
     return(
         <>
             <header className="my-header">
@@ -11,7 +26,11 @@ const Header = function(){
                     <nav className="my-nav">
                         <ul>
                             <li><Link to='/posts/new'>Create</Link></li>
-                            <li onClick={logout}><Link to="/logout">Logout</Link></li>
+                            {
+                                loggedIn?
+                                <li onClick={logout}><Link to="/logout">Logout</Link></li>: 
+                                <li><Link to="/login">Login</Link></li>
+                            }
                             <li><Link to="/login">Login</Link></li>
                         </ul>
                     </nav>
