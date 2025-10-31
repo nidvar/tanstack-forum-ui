@@ -2,7 +2,9 @@ import { createFileRoute, useNavigate } from '@tanstack/react-router';
 
 import { useState } from 'react';
 
-import {createNewPost} from '../../../api/posts'
+import {createNewPost} from '../../../api/posts';
+
+import { useAuth } from '@/store/authContext';
 
 export const Route = createFileRoute('/posts/new/')({
     head: ()=> ({
@@ -12,6 +14,9 @@ export const Route = createFileRoute('/posts/new/')({
 })
 
 function NewPostPage() {
+
+    const authState = useAuth();
+
     const navigate = useNavigate();
     const [title, setTitle] = useState('');
     const [tags, setTags] = useState('');
@@ -19,8 +24,18 @@ function NewPostPage() {
 
     const [disable, setDisable] = useState(false);
 
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const clearError = function(){
+        setErrorMessage('')
+    }
+
     const handleSubmit = async function(e: React.FormEvent<HTMLFormElement>){
         e.preventDefault();
+        if(!authState.loggedIn){
+            setErrorMessage('Please login to create new post');
+            return
+        };
         setDisable(true);
         const tagsArray: string[] = [];
 
@@ -66,7 +81,7 @@ function NewPostPage() {
                         id='title'
                         type='text'
                         value={title}
-                        onChange={function(e){setTitle(e.target.value)}}
+                        onChange={function(e){setTitle(e.target.value); clearError();}}
                     />
 
                     <label
@@ -77,7 +92,7 @@ function NewPostPage() {
                     <textarea
                         id='content'
                         value={content}
-                        onChange={function(e){setContent(e.target.value)}}
+                        onChange={function(e){setContent(e.target.value); clearError();}}
                     ></textarea>
 
                     <label
@@ -90,10 +105,12 @@ function NewPostPage() {
                         id='tags'
                         type='text'
                         value={tags}
-                        onChange={function(e){setTags(e.target.value)}}
+                        onChange={function(e){setTags(e.target.value); clearError();}}
                     />
 
                     <button className='button margin-top' disabled={disable}>CREATE</button>
+
+                    <p className='error'>{errorMessage}</p>
                 </form>
             </div>
         </>
