@@ -174,13 +174,20 @@ button {
 
 /* comment */
 
-.comments {
+.comments-section {
     padding: 15px;
     margin: auto;
     width: 800px;
 }
 
-.comments textarea {
+.comment-toggle {
+    padding: 10px;
+    height: 30px;
+    width: 100%;
+    border-bottom: 1px solid rgb(207, 206, 206);
+}
+
+.comment {
     width: 100%;
     border: 1px solid rgb(190, 187, 187);
     padding: 10px;

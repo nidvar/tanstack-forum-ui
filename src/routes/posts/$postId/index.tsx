@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
 import { FaTrash, FaPenToSquare } from "react-icons/fa6";
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 import {singlePost, deletePost} from '../../../api/posts';
 
@@ -28,13 +28,13 @@ export const Route = createFileRoute('/posts/$postId/')({
 function PostDetailsPage() {
 
     const authState = useAuth();
+    const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
     const navigate = useNavigate();
 
     const [disable, setDisable] = useState(false);
-
+    const [toggleComment, setToggleComment] = useState(false);
     const [comment, setComment] = useState('');
-
     const [errorMessage, setErrorMessage] = useState('');
 
     const { postId } = Route.useParams();
@@ -58,7 +58,17 @@ function PostDetailsPage() {
 
     const clearError = function(){
         setErrorMessage('');
-    }
+    };
+
+    const handleFocus = () => {
+        textareaRef.current?.focus(); // Focus the textarea
+    };
+
+    useEffect(() => {
+        if (toggleComment) {
+            textareaRef.current?.focus();
+        }
+    }, [toggleComment]);
 
     return (
         <>
@@ -95,13 +105,34 @@ function PostDetailsPage() {
                 }
             </div>
 
-            <div className='comments'>
-                <textarea
-                    placeholder='Add a comment'
-                    id='content'
-                    value={comment}
-                    onChange={function(e){setComment(e.target.value); clearError();}}
-                ></textarea>
+            <div className='comments-section'>
+                {
+                    toggleComment?
+                        <>
+                            <textarea
+                                ref={textareaRef}
+                                className='comment'
+                                placeholder='Add a comment'
+                                id='comment'
+                                value={comment}
+                                onChange={function(e){setComment(e.target.value); clearError();}}
+                            ></textarea>
+                            <div className='my-flex-end'>
+                                <button 
+                                    onClick={function(){setToggleComment(false); clearError();}} 
+                                    className='margin-top'
+                                >
+                                    CANCEL
+                                </button>
+                                <button className='margin-top ml-l'>ADD</button>
+                            </div>
+                        </>:<input
+                                className='comment-toggle'
+                                placeholder='Add a comment'
+                                id='comment'
+                                onClick={function(){setToggleComment(true); clearError();}}
+                            />
+                }
                 <p>{errorMessage}</p>
             </div>
         </>
