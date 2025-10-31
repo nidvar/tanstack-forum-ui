@@ -19,6 +19,12 @@ function RouteComponent() {
 
     const [disableButton, setDisableButton] = useState(false);
 
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const clearError = function(){
+        setErrorMessage('')
+    }
+
     const handleSubmit = function(e: React.FormEvent<HTMLFormElement>){
         e.preventDefault();
 
@@ -26,12 +32,19 @@ function RouteComponent() {
         if(title.trim() == '' || content.trim() == ''){
             return;
         }
+
         if(tags != ''){
             const arr = tags.split(',');
             arr.forEach((item)=>{
                 tagsArray.push(item.trim())
             });
-        }
+        };
+
+        if(tagsArray.length > 5){
+            setErrorMessage('too many tags');
+            return
+        };
+        
         const formData = {
             title,
             content,
@@ -69,7 +82,7 @@ function RouteComponent() {
                         id='title'
                         type='text'
                         value={title}
-                        onChange={function(e){setTitle(e.target.value)}}
+                        onChange={function(e){setTitle(e.target.value); clearError();}}
                     />
 
                     <label
@@ -80,7 +93,7 @@ function RouteComponent() {
                     <textarea
                         id='content'
                         value={content}
-                        onChange={function(e){setContent(e.target.value)}}
+                        onChange={function(e){setContent(e.target.value); clearError();}}
                     ></textarea>
 
                     <label
@@ -93,10 +106,11 @@ function RouteComponent() {
                         id='tags'
                         type='text'
                         value={tags}
-                        onChange={function(e){setTags(e.target.value)}}
+                        onChange={function(e){setTags(e.target.value); clearError();}}
                     />
 
                     <button className='button margin-top' disabled={disableButton}>EDIT</button>
+                    <p className='error'>{errorMessage}</p>
                 </form>
             </div>
         </>

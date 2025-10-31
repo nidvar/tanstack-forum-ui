@@ -18,7 +18,7 @@ const PostCard = function({post, link}: {post: Post, link: string}){
                     </p>
                     <h3>{post.title}</h3>
                     <p>
-                        {post.tags.length > 0? post.tags.map((item)=>{ return <span key={post._id} className='post-card-tags'>{item}</span> }):'' }
+                        {post.tags.length > 0? post.tags.map((item, index)=>{ return <span key={post._id + index} className='post-card-tags'>{item}</span> }):'' }
                     </p>
                 </Link>
             </div>

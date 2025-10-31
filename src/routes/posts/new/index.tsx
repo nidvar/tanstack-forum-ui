@@ -47,7 +47,13 @@ function NewPostPage() {
             arr.forEach((item)=>{
                 tagsArray.push(item.trim())
             });
-        }
+        };
+
+        if(tagsArray.length > 5){
+            setErrorMessage('too many tags');
+            return
+        };
+
         const formData = {
             title,
             content,
@@ -101,7 +107,7 @@ function NewPostPage() {
                         Tags (optional)
                     </label>
                     <input
-                        placeholder='comma separated'
+                        placeholder='comma separated, maximum 5'
                         id='tags'
                         type='text'
                         value={tags}
