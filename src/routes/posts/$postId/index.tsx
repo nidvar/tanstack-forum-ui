@@ -33,6 +33,10 @@ function PostDetailsPage() {
 
     const [disable, setDisable] = useState(false);
 
+    const [comment, setComment] = useState('');
+
+    const [errorMessage, setErrorMessage] = useState('');
+
     const { postId } = Route.useParams();
     const {data: post} = useSuspenseQuery(postQueryOptions(postId));
 
@@ -50,6 +54,10 @@ function PostDetailsPage() {
 
     const editPost = function(id: string){
         navigate({ to: `/posts/$postId/edit`, params:{ postId: id } });
+    };
+
+    const clearError = function(){
+        setErrorMessage('');
     }
 
     return (
@@ -71,7 +79,6 @@ function PostDetailsPage() {
                 
                 <div className='post-title-header'>
                     <h2>{post.title}</h2>
-                    
                 </div>
                 <p className='post-content'>{post.content}</p>
                 {
@@ -86,6 +93,16 @@ function PostDetailsPage() {
                         </div>
                     ):''
                 }
+            </div>
+
+            <div className='comments'>
+                <textarea
+                    placeholder='Add a comment'
+                    id='content'
+                    value={comment}
+                    onChange={function(e){setComment(e.target.value); clearError();}}
+                ></textarea>
+                <p>{errorMessage}</p>
             </div>
         </>
     )
