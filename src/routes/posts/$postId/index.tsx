@@ -6,6 +6,8 @@ import { useState } from 'react'
 
 import {singlePost, deletePost} from '../../../api/posts';
 
+import { useAuth } from '../../../store/authContext';
+
 const postQueryOptions = function(postId: string){
     return queryOptions({
         queryKey: ['post', postId],
@@ -24,6 +26,11 @@ export const Route = createFileRoute('/posts/$postId/')({
 })
 
 function PostDetailsPage() {
+
+    const authState = useAuth();
+
+
+
     const navigate = useNavigate();
 
     const [disable, setDisable] = useState(false);
@@ -69,14 +76,18 @@ function PostDetailsPage() {
                     
                 </div>
                 <p className='post-content'>{post.content}</p>
-                <div className='my-flex-end'>
-                    <button className='margin-top' onClick={function(){editPost(post._id)}}>
-                        <FaPenToSquare size={24} />
-                    </button>
-                    <button className='margin-top ml-l' onClick={function(){postDelete(post._id)}} disabled={disable}>
-                        <FaTrash size={24} />
-                    </button>
-                </div>
+                {
+                    authState.loggedIn?(
+                        <div className='my-flex-end'>
+                            <button className='margin-top' onClick={function(){editPost(post._id)}}>
+                                <FaPenToSquare size={24} />
+                            </button>
+                            <button className='margin-top ml-l' onClick={function(){postDelete(post._id)}} disabled={disable}>
+                                <FaTrash size={24} />
+                            </button>
+                        </div>
+                    ):''
+                }
             </div>
         </>
     )

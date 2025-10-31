@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 import { logout, authMe } from '../api/auth';
 
-import { useAuth } from '../store/authContext'
+import { useAuth } from '../store/authContext';
 
 const Header = function(){
 
