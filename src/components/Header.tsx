@@ -1,18 +1,30 @@
 import { Link } from '@tanstack/react-router';
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { logout, authMe } from '../api/auth';
 
+import { useAuth } from '../store/authContext'
+
 const Header = function(){
 
-    const [loggedIn, setLoggedIn] = useState(false);
+    const authState = useAuth();
+
+    const logoutFn = async function(){
+        const result = await logout();
+
+        if(result.message && result.message == 'logged out'){
+            authState.setLoggedIn(false);
+        }
+    }
 
     useEffect(()=>{
         async function auth(){
             const data =  await authMe();
-            if(data.user != null){
-                setLoggedIn(true);
+            if(data.user == null){
+                authState.setLoggedIn(false);
+            }else{
+                authState.setLoggedIn(true);
             }
         }
         auth();
@@ -27,11 +39,10 @@ const Header = function(){
                         <ul>
                             <li><Link to='/posts/new'>Create</Link></li>
                             {
-                                loggedIn?
-                                <li onClick={logout}><Link to="/logout">Logout</Link></li>: 
+                                authState.loggedIn?
+                                <button onClick={logoutFn}><Link to="/logout">Logout</Link></button>: 
                                 <li><Link to="/login">Login</Link></li>
                             }
-                            <li><Link to="/login">Login</Link></li>
                         </ul>
                     </nav>
                 </div>

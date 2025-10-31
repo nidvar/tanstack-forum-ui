@@ -7,6 +7,7 @@ import { QueryClient } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 
 import Header from '../components/Header';
+import { AuthProvider } from '../store/authContext'
 
 type RouterContext = {
     queryClient: QueryClient
@@ -23,9 +24,11 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 function RootLayout(){
     return (
         <>
-            <HeadContent />
-            <Header />
-            <Outlet />
+            <AuthProvider>
+                <HeadContent />
+                <Header />
+                <Outlet />
+            </AuthProvider>
         </>
     )
 }

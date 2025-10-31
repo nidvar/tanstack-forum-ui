@@ -4,11 +4,15 @@ import { useState } from 'react';
 
 import { login } from '../../api/auth';
 
+import { useAuth } from '../../store/authContext';
+
 export const Route = createFileRoute('/login/')({
     component: RouteComponent,
 })
 
 function RouteComponent() {
+
+    const authState = useAuth();
 
     const navigate = useNavigate();
 
@@ -39,6 +43,7 @@ function RouteComponent() {
             if(result.error){
                 setErrorMessage(result.error);
             }else{
+                authState.setLoggedIn(true);
                 navigate({ to: '/' });
             }
         } catch (error) {
