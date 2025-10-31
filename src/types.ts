@@ -6,6 +6,9 @@ export type Post = {
         url?: string;
         public_id?: string;
     };
+    comments: string[]
+    likes: string[]
+    dislikes: string[]
     tags: string[]
     createdAt: string
     username: string

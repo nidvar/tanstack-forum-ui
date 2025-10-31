@@ -1,11 +1,9 @@
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
-import { FaTrash, FaPenToSquare } from "react-icons/fa6";
-
-import { useState, useRef, useEffect } from 'react'
+import { FaTrash, FaPenToSquare, FaComment } from "react-icons/fa6";
+import { useState, useRef, useEffect } from 'react';
 
 import {singlePost, deletePost} from '../../../api/posts';
-
 import { useAuth } from '../../../store/authContext';
 
 const postQueryOptions = function(postId: string){
@@ -37,6 +35,14 @@ function PostDetailsPage() {
     const [comment, setComment] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
+    const [hoverLike, setHoverLike] = useState(false);
+
+    const [likeChoice, setLikeChoice] = useState(false);
+
+
+
+
+
     const { postId } = Route.useParams();
     const {data: post} = useSuspenseQuery(postQueryOptions(postId));
 
@@ -60,8 +66,9 @@ function PostDetailsPage() {
         setErrorMessage('');
     };
 
-    const handleFocus = () => {
-        textareaRef.current?.focus(); // Focus the textarea
+    const chooseLike = function(){
+        const votedState = likeChoice;
+        setLikeChoice(!votedState);
     };
 
     useEffect(() => {
@@ -86,11 +93,36 @@ function PostDetailsPage() {
                         <p className='post-username'>{post.username}</p>
                     </div>
                 </div>
-                
-                <div className='post-title-header'>
-                    <h2>{post.title}</h2>
+
+                <h2>{post.title}</h2>
+                <p>{post.content}</p>
+
+                <div className='post-stats'>
+
+                    {
+                        likeChoice === false? (
+                            <div 
+                                onMouseEnter={function(){setHoverLike(true)}}
+                                onMouseLeave={function(){setHoverLike(false)}}
+                            >
+                                {
+                                    hoverLike === true? 
+                                    <img onClick={function(){chooseLike()}} className='icon' src="/liked.ico"/>: 
+                                    <img onClick={function(){chooseLike()}} className='icon' src="/like.ico"/>
+                                }
+                            </div>
+                        ): 
+                        <img onClick={function(){chooseLike()}} className='icon' src="/liked.ico"/>
+                    }
+
+                    <div>
+                        <img className='icon' src="/comments.ico"/> {post.comments} 
+                    </div>
+                    <div>
+                        <img className='icon' src="/comments.ico"/> {post.comments} 
+                    </div>
                 </div>
-                <p className='post-content'>{post.content}</p>
+
                 {
                     authState.loggedIn?(
                         <div className='my-flex-end'>
@@ -103,6 +135,7 @@ function PostDetailsPage() {
                         </div>
                     ):''
                 }
+
             </div>
 
             <div className='comments-section'>
