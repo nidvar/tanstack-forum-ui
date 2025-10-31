@@ -45,7 +45,7 @@ function NewPostPage() {
         if(tags != ''){
             const arr = tags.split(',');
             arr.forEach((item)=>{
-                tagsArray.push(item)
+                tagsArray.push(item.trim())
             });
         }
         const formData = {
@@ -58,7 +58,7 @@ function NewPostPage() {
 
         try{
             await createNewPost(formData);
-            navigate({ to: '/posts' });
+            navigate({ to: '/' });
         }catch(error){
             console.log('Error ==> ',error)
         }finally{

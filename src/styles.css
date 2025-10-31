@@ -24,7 +24,7 @@ h2 {
 
 h3 {
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 300;
 }
 
 textarea {
@@ -110,11 +110,11 @@ button {
 }
 
 .post {
-    padding: 15px;
+    display: flex;
     margin: 15px 0;
-    border: 1px solid grey;
-    border-radius: 4px;
-    min-width: 500px;
+    border-bottom: 1px solid rgb(190, 190, 190);
+    width: 100%;
+    padding: 5px;
 }
 
 .posts-list-column {
@@ -147,7 +147,25 @@ button {
     min-height: 200px;
 }
 
+.post img {
+    margin: 0 15px 10px 0;
+    width: 80px;
+    height: 60px;
+}
+
+.post-card-tags {
+    font-size: 12px;
+    background-color: lightgrey;
+    border-radius: 4px;
+    padding: 2px 4px;
+    margin-right: 5px;
+}
+
 /* utils */
+
+.small-font{
+    font-size: 12px;
+}
 
 .button {
     border: none;
@@ -177,7 +195,7 @@ button {
 }
 
 .my-nav li {
-    margin: 0 15px;
+    margin: 0 30px;
 }
 
 /* Properties */
@@ -228,4 +246,8 @@ button {
 .error {
     text-align: center;
     color: red;
+}
+
+.black {
+    color: black;
 }

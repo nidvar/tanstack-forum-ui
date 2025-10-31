@@ -29,8 +29,6 @@ function PostDetailsPage() {
 
     const authState = useAuth();
 
-
-
     const navigate = useNavigate();
 
     const [disable, setDisable] = useState(false);
@@ -42,7 +40,7 @@ function PostDetailsPage() {
         setDisable(true);
         try{
             deletePost(id);
-            await navigate({ to: '/posts' });
+            await navigate({ to: '/' });
         }catch(error){
             console.log(error);
         }finally{
@@ -57,7 +55,7 @@ function PostDetailsPage() {
     return (
         <>
             <div className='main post-details'>
-                <Link to='/posts' className='blue underline'>{'<-'} Back to posts</Link>
+                <Link to='/' className='blue underline'>{'<-'} Back to posts</Link>
                 <div className='post-header'>
                     <div className='profile-icon'>
                         <p>PP</p>

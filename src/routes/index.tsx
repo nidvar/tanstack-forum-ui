@@ -11,30 +11,27 @@ export const Route = createFileRoute('/')({
 })
 
 function App() {
-    const [displayPosts, setDisplayPosts] = useState<Post[]>([]);
-    
+    const [posts, setPosts] = useState<Post[]>([]);
+
     const loadPosts = async function(){
         const posts = await allPosts();
-        posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-        const firstThree = posts.slice(0, 3);
-        setDisplayPosts(firstThree);
+        setPosts(posts);
     }
 
     useEffect(()=>{
         loadPosts();
-    }, []);
+    }, [])
 
     return (
         <div className='main'>
             <h1>Forum</h1>
             <p className='center'>React | TypeScript | Node | MongoDB | JWT</p>
-            <div className='posts-list'>
-                {displayPosts.map((item)=>{
+            <div className='posts-list-column'>
+                {posts.map((item)=>{
                     return(
-                        <PostCard post={item} key={item._id} link={'./posts/' + item._id} />
+                        <PostCard post={item} key={item._id} link={'./posts/' + item._id}/>
                     )
                 })}
-                <Link to='/posts' className='center button'>View All Posts</Link>
             </div>
         </div>
     )

@@ -2,6 +2,10 @@ export type Post = {
     _id: string
     title: string
     content: string
+    img?: {
+        url?: string;
+        public_id?: string;
+    };
     tags: string[]
     createdAt: string
     username: string

@@ -29,7 +29,7 @@ function RouteComponent() {
         if(tags != ''){
             const arr = tags.split(',');
             arr.forEach((item)=>{
-                tagsArray.push(item)
+                tagsArray.push(item.trim())
             });
         }
         const formData = {
@@ -38,7 +38,7 @@ function RouteComponent() {
             tags: [...tagsArray]
         };
         editPost(formData, postId);
-        navigate({ to: '/posts' });
+        navigate({ to: '/' });
         setDisableButton(true);
     }
 
