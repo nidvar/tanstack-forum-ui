@@ -6,9 +6,9 @@ const PostCard = function({post, link}: {post: Post, link: string}){
     return(
         <>
             <div className='post' key={post._id} >
-                <div>
+                <div className='post-card-img-thumbnail'>
                     {
-                        post.img?.url? <img src={post.img.url} alt={post.title} />: '📄'
+                        post.img?.url? <img src={post.img.url} alt={post.title} />: <div className='post-card-img-placeholder'>📄</div>
                     }
                 </div>
                 <Link to={link}>

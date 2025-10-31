@@ -110,13 +110,14 @@ button {
     display: flex;
     border-bottom: 1px solid rgb(190, 190, 190);
     width: 100%;
-    padding: 5px 0 10px 0;
+    padding: 8px 0;
 }
 
 .posts-list-column {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    gap: 10px;
 }
 
 .post-details {
@@ -140,7 +141,8 @@ button {
 }
 
 .post-content {
-    min-height: 200px;
+    min-height: 100px;
+    margin-bottom: 15px;
 }
 
 .post img {
@@ -157,6 +159,19 @@ button {
     margin-right: 5px;
 }
 
+.post-card-img-thumbnail {
+    width: 100px;
+    margin-right: 15px;
+}
+
+.post-card-img-placeholder {
+    border: 1px solid rgb(190, 185, 185);
+    width: 100px;
+    height: 80px;
+    text-align: center;
+    align-content: center;
+}
+
 /* comment */
 
 .comments {
@@ -166,7 +181,7 @@ button {
 }
 
 .comments textarea {
-    width: 800px;
+    width: 100%;
     border: 1px solid rgb(190, 187, 187);
     padding: 10px;
 }
