@@ -7,9 +7,11 @@ const PostCard = function({post, link}: {post: Post, link: string}){
         <>
             <div className='post' key={post._id} >
                 <div className='post-card-img-thumbnail'>
-                    {
-                        post.img?.url? <img src={post.img.url} alt={post.title} />: <div className='post-card-img-placeholder'>📄</div>
-                    }
+                    <Link to={link}>
+                        {
+                            post.img?.url? <img src={post.img.url} alt={post.title} />: <div className='post-card-img-placeholder'>📄</div>
+                        }
+                    </Link>
                 </div>
                 <Link to={link}>
                     <p>

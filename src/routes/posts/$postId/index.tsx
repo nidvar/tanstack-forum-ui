@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
-import { FaTrash, FaPenToSquare, FaComment } from "react-icons/fa6";
+import { FaTrash, FaPenToSquare } from "react-icons/fa6";
 import { useState, useRef, useEffect } from 'react';
 
 import {singlePost, deletePost} from '../../../api/posts';
@@ -35,12 +35,35 @@ function PostDetailsPage() {
     const [comment, setComment] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
+
+
+    // like dislike
+
     const [hoverLike, setHoverLike] = useState(false);
 
     const [likeChoice, setLikeChoice] = useState(false);
 
 
 
+    const [hoverDislike, setHoverDislike] = useState(false);
+
+    const [dislikeChoice, setDislikeChoice] = useState(false);
+
+
+
+    const chooseDislike = function(){
+        const votedState = dislikeChoice;
+        setDislikeChoice(!votedState);
+        setHoverLike(false);
+        setLikeChoice(false);
+    }
+
+    const chooseLike = function(){
+        const votedState = likeChoice;
+        setLikeChoice(!votedState);
+        setHoverDislike(false);
+        setDislikeChoice(false);
+    };
 
 
     const { postId } = Route.useParams();
@@ -66,16 +89,14 @@ function PostDetailsPage() {
         setErrorMessage('');
     };
 
-    const chooseLike = function(){
-        const votedState = likeChoice;
-        setLikeChoice(!votedState);
-    };
+
 
     useEffect(() => {
         if (toggleComment) {
             textareaRef.current?.focus();
         }
     }, [toggleComment]);
+
 
     return (
         <>
@@ -115,9 +136,22 @@ function PostDetailsPage() {
                         <img onClick={function(){chooseLike()}} className='icon' src="/liked.ico"/>
                     }
 
-                    <div>
-                        <img className='icon' src="/comments.ico"/> {post.comments} 
-                    </div>
+                    {
+                        dislikeChoice === false? (
+                            <div 
+                                onMouseEnter={function(){setHoverDislike(true)}}
+                                onMouseLeave={function(){setHoverDislike(false)}}
+                            >
+                                {
+                                    hoverDislike === true? 
+                                    <img onClick={function(){chooseDislike()}} className='icon' src="/disliked.ico"/>: 
+                                    <img onClick={function(){chooseDislike()}} className='icon' src="/dislike.ico"/>
+                                }
+                            </div>
+                        ): 
+                        <img onClick={function(){chooseDislike()}} className='icon' src="/disliked.ico"/>
+                    }
+
                     <div>
                         <img className='icon' src="/comments.ico"/> {post.comments} 
                     </div>
