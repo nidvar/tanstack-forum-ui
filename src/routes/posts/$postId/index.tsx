@@ -92,7 +92,7 @@ function PostDetailsPage() {
                 <h2>{post.title}</h2>
                 <p>{post.content}</p>
 
-                <div onClick={function(){likeOrDislikeAPI(likeOrDislike, postId, authState.userData.email)}} >
+                <div onClick={function(){likeOrDislikeAPI(likeOrDislike, postId, authState)}} >
                     <PostStats likeDislike={grabLikeDislike} likes={post.likes.length} dislikes={post.dislikes.length} />
                 </div>
 

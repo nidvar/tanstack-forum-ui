@@ -1,8 +1,9 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
+
+import { authMe } from '../api/auth';
 
 type UserData = {
     email: string
-    id: string
     profilePic: string
     postsData: [any]
 };
@@ -18,7 +19,6 @@ const AuthContext = createContext<AuthContextType>({
     loggedIn: false,
     userData: {
         email: "",
-        id: "",
         profilePic: "",
         postsData: [{}]
     },
@@ -30,10 +30,22 @@ export const AuthProvider = function({children} : {children: any}){
     const [loggedIn, setLoggedIn] = useState(false);
     const [userData, setUserData] = useState<UserData>({
         email: "",
-        id: "",
         profilePic: "",
         postsData: [{}]
     });
+
+    useEffect(()=>{
+        async function auth(){
+            const response =  await authMe();
+            if(response.loggedIn == null){
+                setLoggedIn(false);
+            }else{
+                setLoggedIn(true);
+                setUserData(response.data);
+            }
+        }
+        auth();
+    }, []);
 
     return(
         <AuthContext.Provider value={{loggedIn, setLoggedIn, userData, setUserData: setUserData as any}} >

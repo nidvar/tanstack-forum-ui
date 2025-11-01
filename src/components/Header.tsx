@@ -1,8 +1,6 @@
 import { Link } from '@tanstack/react-router';
 
-import { useEffect } from 'react';
-
-import { logout, authMe } from '../api/auth';
+import { logout } from '../api/auth';
 
 import { useAuth } from '../store/authContext';
 
@@ -17,18 +15,6 @@ const Header = function(){
             authState.setLoggedIn(false);
         }
     }
-
-    useEffect(()=>{
-        async function auth(){
-            const response =  await authMe();
-            if(response.loggedIn == null){
-                authState.setLoggedIn(false);
-            }else{
-                authState.setLoggedIn(true);
-            }
-        }
-        auth();
-    }, []);
 
     return(
         <>

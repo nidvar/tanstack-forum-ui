@@ -44,6 +44,7 @@ function RouteComponent() {
                 setErrorMessage(result.error);
             }else{
                 authState.setLoggedIn(true);
+                console.log(result)
                 navigate({ to: '/' });
             }
         } catch (error) {
