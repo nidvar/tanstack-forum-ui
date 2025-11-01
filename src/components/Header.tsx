@@ -20,8 +20,8 @@ const Header = function(){
 
     useEffect(()=>{
         async function auth(){
-            const data =  await authMe();
-            if(data.user == null){
+            const response =  await authMe();
+            if(response.loggedIn == null){
                 authState.setLoggedIn(false);
             }else{
                 authState.setLoggedIn(true);
