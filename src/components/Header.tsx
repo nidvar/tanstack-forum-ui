@@ -29,7 +29,11 @@ const Header = function(){
                             {
                                 authState.loggedIn? (
                                     <>
-                                        <li><Link to="/profile">{authState.userData.username}</Link></li>
+                                        <li>
+                                            <Link to={"/profile/" + authState.userData.username}>
+                                                {authState.userData.username}
+                                            </Link>
+                                        </li>
                                         <li><button onClick={logoutFn}>Logout</button></li> 
                                     </>
                                 ):<li><Link to="/login">Login</Link></li>

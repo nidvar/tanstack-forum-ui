@@ -11,9 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RegisterIndexRouteImport } from './routes/register/index'
-import { Route as ProfileIndexRouteImport } from './routes/profile/index'
 import { Route as LogoutIndexRouteImport } from './routes/logout/index'
 import { Route as LoginIndexRouteImport } from './routes/login/index'
+import { Route as ProfileProfileIdIndexRouteImport } from './routes/profile/$profileId/index'
 import { Route as PostsNewIndexRouteImport } from './routes/posts/new/index'
 import { Route as PostsPostIdIndexRouteImport } from './routes/posts/$postId/index'
 import { Route as PostsPostIdEditRouteImport } from './routes/posts/$postId/edit'
@@ -28,11 +28,6 @@ const RegisterIndexRoute = RegisterIndexRouteImport.update({
   path: '/register/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProfileIndexRoute = ProfileIndexRouteImport.update({
-  id: '/profile/',
-  path: '/profile/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LogoutIndexRoute = LogoutIndexRouteImport.update({
   id: '/logout/',
   path: '/logout/',
@@ -41,6 +36,11 @@ const LogoutIndexRoute = LogoutIndexRouteImport.update({
 const LoginIndexRoute = LoginIndexRouteImport.update({
   id: '/login/',
   path: '/login/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileProfileIdIndexRoute = ProfileProfileIdIndexRouteImport.update({
+  id: '/profile/$profileId/',
+  path: '/profile/$profileId/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PostsNewIndexRoute = PostsNewIndexRouteImport.update({
@@ -63,32 +63,32 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginIndexRoute
   '/logout': typeof LogoutIndexRoute
-  '/profile': typeof ProfileIndexRoute
   '/register': typeof RegisterIndexRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
   '/posts/$postId': typeof PostsPostIdIndexRoute
   '/posts/new': typeof PostsNewIndexRoute
+  '/profile/$profileId': typeof ProfileProfileIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginIndexRoute
   '/logout': typeof LogoutIndexRoute
-  '/profile': typeof ProfileIndexRoute
   '/register': typeof RegisterIndexRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
   '/posts/$postId': typeof PostsPostIdIndexRoute
   '/posts/new': typeof PostsNewIndexRoute
+  '/profile/$profileId': typeof ProfileProfileIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/login/': typeof LoginIndexRoute
   '/logout/': typeof LogoutIndexRoute
-  '/profile/': typeof ProfileIndexRoute
   '/register/': typeof RegisterIndexRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
   '/posts/$postId/': typeof PostsPostIdIndexRoute
   '/posts/new/': typeof PostsNewIndexRoute
+  '/profile/$profileId/': typeof ProfileProfileIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -96,42 +96,42 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/logout'
-    | '/profile'
     | '/register'
     | '/posts/$postId/edit'
     | '/posts/$postId'
     | '/posts/new'
+    | '/profile/$profileId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/login'
     | '/logout'
-    | '/profile'
     | '/register'
     | '/posts/$postId/edit'
     | '/posts/$postId'
     | '/posts/new'
+    | '/profile/$profileId'
   id:
     | '__root__'
     | '/'
     | '/login/'
     | '/logout/'
-    | '/profile/'
     | '/register/'
     | '/posts/$postId/edit'
     | '/posts/$postId/'
     | '/posts/new/'
+    | '/profile/$profileId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LoginIndexRoute: typeof LoginIndexRoute
   LogoutIndexRoute: typeof LogoutIndexRoute
-  ProfileIndexRoute: typeof ProfileIndexRoute
   RegisterIndexRoute: typeof RegisterIndexRoute
   PostsPostIdEditRoute: typeof PostsPostIdEditRoute
   PostsPostIdIndexRoute: typeof PostsPostIdIndexRoute
   PostsNewIndexRoute: typeof PostsNewIndexRoute
+  ProfileProfileIdIndexRoute: typeof ProfileProfileIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -150,13 +150,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegisterIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/profile/': {
-      id: '/profile/'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof ProfileIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/logout/': {
       id: '/logout/'
       path: '/logout'
@@ -169,6 +162,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile/$profileId/': {
+      id: '/profile/$profileId/'
+      path: '/profile/$profileId'
+      fullPath: '/profile/$profileId'
+      preLoaderRoute: typeof ProfileProfileIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/posts/new/': {
@@ -199,11 +199,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoginIndexRoute: LoginIndexRoute,
   LogoutIndexRoute: LogoutIndexRoute,
-  ProfileIndexRoute: ProfileIndexRoute,
   RegisterIndexRoute: RegisterIndexRoute,
   PostsPostIdEditRoute: PostsPostIdEditRoute,
   PostsPostIdIndexRoute: PostsPostIdIndexRoute,
   PostsNewIndexRoute: PostsNewIndexRoute,
+  ProfileProfileIdIndexRoute: ProfileProfileIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
