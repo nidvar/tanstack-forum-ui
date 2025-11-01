@@ -6,6 +6,8 @@ import { useState, useRef, useEffect } from 'react';
 import {singlePost, deletePost} from '../../../api/posts';
 import { useAuth } from '../../../store/authContext';
 
+import PostStats from '../../../components/PostStats'
+
 const postQueryOptions = function(postId: string){
     return queryOptions({
         queryKey: ['post', postId],
@@ -34,37 +36,7 @@ function PostDetailsPage() {
     const [toggleComment, setToggleComment] = useState(false);
     const [comment, setComment] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-
-
-
-    // like dislike
-
-    const [hoverLike, setHoverLike] = useState(false);
-
-    const [likeChoice, setLikeChoice] = useState(false);
-
-
-
-    const [hoverDislike, setHoverDislike] = useState(false);
-
-    const [dislikeChoice, setDislikeChoice] = useState(false);
-
-
-
-    const chooseDislike = function(){
-        const votedState = dislikeChoice;
-        setDislikeChoice(!votedState);
-        setHoverLike(false);
-        setLikeChoice(false);
-    }
-
-    const chooseLike = function(){
-        const votedState = likeChoice;
-        setLikeChoice(!votedState);
-        setHoverDislike(false);
-        setDislikeChoice(false);
-    };
-
+    const [likeOrDislike, setLikeOrDislike] = useState('');
 
     const { postId } = Route.useParams();
     const {data: post} = useSuspenseQuery(postQueryOptions(postId));
@@ -89,7 +61,9 @@ function PostDetailsPage() {
         setErrorMessage('');
     };
 
-
+    const grabLikeDislike = function(arg: string){
+        setLikeOrDislike(arg);
+    };
 
     useEffect(() => {
         if (toggleComment) {
@@ -108,63 +82,26 @@ function PostDetailsPage() {
                     </div>
                     <div>
                         <p>
-                            <span className='post-tags'>{post.tags.map((item)=> item)}</span>
+                            {post.username}
                             <span className='post-time'> - {post.createdAt}</span>
                         </p>
-                        <p className='post-username'>{post.username}</p>
+                        <span className='post-tags'>{post.tags.map((item)=> item)}</span>
                     </div>
                 </div>
 
                 <h2>{post.title}</h2>
                 <p>{post.content}</p>
 
-                <div className='post-stats'>
-
-                    {
-                        likeChoice === false? (
-                            <div 
-                                onMouseEnter={function(){setHoverLike(true)}}
-                                onMouseLeave={function(){setHoverLike(false)}}
-                            >
-                                {
-                                    hoverLike === true? 
-                                    <img onClick={function(){chooseLike()}} className='icon' src="/liked.ico"/>: 
-                                    <img onClick={function(){chooseLike()}} className='icon' src="/like.ico"/>
-                                }
-                            </div>
-                        ): 
-                        <img onClick={function(){chooseLike()}} className='icon' src="/liked.ico"/>
-                    }
-
-                    {
-                        dislikeChoice === false? (
-                            <div 
-                                onMouseEnter={function(){setHoverDislike(true)}}
-                                onMouseLeave={function(){setHoverDislike(false)}}
-                            >
-                                {
-                                    hoverDislike === true? 
-                                    <img onClick={function(){chooseDislike()}} className='icon' src="/disliked.ico"/>: 
-                                    <img onClick={function(){chooseDislike()}} className='icon' src="/dislike.ico"/>
-                                }
-                            </div>
-                        ): 
-                        <img onClick={function(){chooseDislike()}} className='icon' src="/disliked.ico"/>
-                    }
-
-                    <div>
-                        <img className='icon' src="/comments.ico"/> {post.comments} 
-                    </div>
-                </div>
+                <PostStats likeDislike={grabLikeDislike} likes={post.likes.length} dislikes={post.dislikes.length} />
 
                 {
                     authState.loggedIn?(
                         <div className='my-flex-end'>
                             <button className='margin-top' onClick={function(){editPost(post._id)}}>
-                                <FaPenToSquare size={24} />
+                                <FaPenToSquare size={18} />
                             </button>
                             <button className='margin-top ml-l' onClick={function(){postDelete(post._id)}} disabled={disable}>
-                                <FaTrash size={24} />
+                                <FaTrash size={18} />
                             </button>
                         </div>
                     ):''
