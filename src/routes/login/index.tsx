@@ -32,6 +32,12 @@ function RouteComponent() {
 
         setDisable(true);
 
+        if(password.trim() == '' || email.trim() == ''){
+            setErrorMessage('Please enter your email and password');
+            setDisable(false);
+            return
+        }
+
         const userData = {
             password,
             email
@@ -47,8 +53,12 @@ function RouteComponent() {
                 console.log(result)
                 navigate({ to: '/' });
             }
-        } catch (error) {
-            console.log('login error ===>', error)
+        } catch (error: any) {
+            if(error.response && error.response.data.error){
+                setErrorMessage(error.response.data.error)
+            }else{
+                console.log(error);
+            }
         } finally {
             setDisable(false);
         }
