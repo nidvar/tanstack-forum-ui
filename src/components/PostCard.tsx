@@ -14,16 +14,16 @@ const PostCard = function({post, link}: {post: Post, link: string}){
                         }
                     </Link>
                 </div>
-                <div>
+                <Link to={link}>
                     <p>
                         <span className='post-username black'>{post.username} -</span>
                         <span className='post-time'> {timeAgo(post.createdAt)}</span>
                     </p>
-                    <Link to={link}><h3>{post.title}</h3></Link>
+                    <h3>{post.title}</h3>
                     <p>
                         {post.tags.length > 0? post.tags.map((item, index)=>{ return <span key={post._id + index} className='post-card-tags'>{item}</span> }):'' }
                     </p>
-                </div>
+                </Link>
             </div>
         </>
     )

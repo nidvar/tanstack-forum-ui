@@ -80,12 +80,16 @@ function PostDetailsPage() {
                 <Link to='/' className='blue underline'>{'<-'} Back to posts</Link>
                 <div className='post-header'>
                     <div className='profile-icon'>
-                        <img src="/blank_profile.jpg" />
+                        <Link to={'/profile/' + post.username}>
+                            <img src="/blank_profile.jpg" />
+                        </Link>
                     </div>
                     <div>
                         <p>
-                            {post.username}
-                            <span className='post-time'> - {timeAgo(post.createdAt)}</span>
+                            <Link to={'/profile/' + post.username}>
+                                {post.username}
+                                <span className='post-time'> - {timeAgo(post.createdAt)}</span>
+                            </Link>
                         </p>
                         <span className='post-tags'>{post.tags.map((item)=> item)}</span>
                     </div>
