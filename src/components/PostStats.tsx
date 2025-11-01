@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
 
+import {likeOrDislikeAPI} from '../api/posts'
+
 type PostStatsProps = {
     likeDislike: (choice: 'like' | 'dislike' | 'none') => void;
     likes: number
     dislikes: number
+    id: string
+    email: string
 }
 
-const PostStats = function ({likeDislike, likes, dislikes}: PostStatsProps) {
+const PostStats = function ({likes, dislikes, id, email}: PostStatsProps) {
 
     const [hoverLike, setHoverLike] = useState(false);
     const [likeChoice, setLikeChoice] = useState(false);
@@ -19,6 +23,8 @@ const PostStats = function ({likeDislike, likes, dislikes}: PostStatsProps) {
         setDislikeChoice(!votedState);
         setHoverLike(false);
         setLikeChoice(false);
+
+        likeOrDislikeAPI('dislike', id, email)
     }
 
     const chooseLike = function () {
@@ -26,15 +32,13 @@ const PostStats = function ({likeDislike, likes, dislikes}: PostStatsProps) {
         setLikeChoice(!votedState);
         setHoverDislike(false);
         setDislikeChoice(false);
+
+        likeOrDislikeAPI('like', id, email)
     };
 
     useEffect(()=>{
-        if(likeChoice){
-            likeDislike('like')
-        }else if(dislikeChoice){
-            likeDislike('dislike')
-        }else{
-            likeDislike('none');
+        if(!likeChoice && !dislikeChoice){
+            likeOrDislikeAPI('none', id, email)
         }
     }, [likeChoice, dislikeChoice]);
 

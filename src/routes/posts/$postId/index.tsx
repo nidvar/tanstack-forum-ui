@@ -3,7 +3,7 @@ import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
 import { FaTrash, FaPenToSquare } from "react-icons/fa6";
 import { useState, useRef, useEffect } from 'react';
 
-import {singlePost, deletePost, likeOrDislikeAPI} from '../../../api/posts';
+import {singlePost, deletePost} from '../../../api/posts';
 import { useAuth } from '../../../store/authContext';
 
 import PostStats from '../../../components/PostStats'
@@ -92,9 +92,7 @@ function PostDetailsPage() {
                 <h2>{post.title}</h2>
                 <p>{post.content}</p>
 
-                <div onClick={function(){likeOrDislikeAPI(likeOrDislike, postId, authState)}} >
-                    <PostStats likeDislike={grabLikeDislike} likes={post.likes.length} dislikes={post.dislikes.length} />
-                </div>
+                <PostStats likeDislike={grabLikeDislike} likes={post.likes.length} dislikes={post.dislikes.length} id={postId} email={authState.userData.email}/>
 
                 {
                     authState.loggedIn?(
