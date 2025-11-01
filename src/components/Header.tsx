@@ -27,9 +27,12 @@ const Header = function(){
                         <ul>
                             <li><Link to='/posts/new'>Create</Link></li>
                             {
-                                authState.loggedIn?
-                                <li><button onClick={logoutFn}>Logout</button></li>: 
-                                <li><Link to="/login">Login</Link></li>
+                                authState.loggedIn? (
+                                    <>
+                                        <li><Link to="/profile">{authState.userData.username}</Link></li>
+                                        <li><button onClick={logoutFn}>Logout</button></li> 
+                                    </>
+                                ):<li><Link to="/login">Login</Link></li>
                             }
                         </ul>
                     </nav>

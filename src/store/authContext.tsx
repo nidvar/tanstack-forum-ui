@@ -3,6 +3,7 @@ import { createContext, useState, useContext, useEffect } from 'react';
 import { authMe } from '../api/auth';
 
 type UserData = {
+    username: string
     email: string
     profilePic: string
     postsData: [any]
@@ -18,6 +19,7 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType>({
     loggedIn: false,
     userData: {
+        username: "",
         email: "",
         profilePic: "",
         postsData: [{}]
@@ -29,6 +31,7 @@ const AuthContext = createContext<AuthContextType>({
 export const AuthProvider = function({children} : {children: any}){
     const [loggedIn, setLoggedIn] = useState(false);
     const [userData, setUserData] = useState<UserData>({
+        username: "",
         email: "",
         profilePic: "",
         postsData: [{}]

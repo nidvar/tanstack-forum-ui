@@ -178,6 +178,11 @@ button {
     margin: 15px 0;
 }
 
+.profile-img {
+    width: 30px;
+    height: 30px;
+}
+
 /* comment */
 
 .comments-section {
