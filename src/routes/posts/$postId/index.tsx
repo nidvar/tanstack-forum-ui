@@ -41,7 +41,12 @@ function PostDetailsPage() {
     const [, setLikeOrDislike] = useState('');
 
     const { postId } = Route.useParams();
-    const {data: post} = useSuspenseQuery(postQueryOptions(postId));
+
+    const payload = useSuspenseQuery(postQueryOptions(postId));
+
+    const post = payload.data.data;
+    const postAuthor = payload.data.postAuthor
+
 
     const postDelete = async function(id: string){
         setDisable(true);
@@ -68,6 +73,7 @@ function PostDetailsPage() {
     };
 
     useEffect(() => {
+        console.log('posts page')
         if (toggleComment) {
             textareaRef.current?.focus();
         }
@@ -81,7 +87,7 @@ function PostDetailsPage() {
                 <div className='post-header'>
                     <div className='profile-icon'>
                         <Link to={'/profile/' + post.username}>
-                            <img src="/blank_profile.jpg" />
+                            <img src={postAuthor.profilePic || '/blank_profile.jpg'} />
                         </Link>
                     </div>
                     <div>
@@ -91,7 +97,7 @@ function PostDetailsPage() {
                                 <span className='post-time'> - {timeAgo(post.createdAt)}</span>
                             </Link>
                         </p>
-                        <span className='post-tags'>{post.tags.map((item)=> item)}</span>
+                        <span className='post-tags'>{post.tags.map((item: any)=> item)}</span>
                     </div>
                 </div>
 
