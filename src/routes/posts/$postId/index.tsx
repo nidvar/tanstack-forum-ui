@@ -78,7 +78,7 @@ function PostDetailsPage() {
                 <Link to='/' className='blue underline'>{'<-'} Back to posts</Link>
                 <div className='post-header'>
                     <div className='profile-icon'>
-                        <p>PP</p>
+                        <img src="/blank_profile.jpg" />
                     </div>
                     <div>
                         <p>

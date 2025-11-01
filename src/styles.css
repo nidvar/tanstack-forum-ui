@@ -92,11 +92,10 @@ button {
 }
 
 .profile-icon {
-    border: 1px solid black;
-    margin-right: 10px;
+    background-color: wheat;
+    margin: 5px 10px 5px 5px;
     width: 40px;
     height: 40px;
-    border-radius: 50%;
 }
 
 .posts-list {
