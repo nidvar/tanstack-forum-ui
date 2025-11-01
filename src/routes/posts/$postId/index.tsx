@@ -3,7 +3,7 @@ import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
 import { FaTrash, FaPenToSquare } from "react-icons/fa6";
 import { useState, useRef, useEffect } from 'react';
 
-import {singlePost, deletePost} from '../../../api/posts';
+import {singlePost, deletePost, addComment} from '../../../api/posts';
 import { useAuth } from '../../../store/authContext';
 
 import PostStats from '../../../components/PostStats';
@@ -37,7 +37,8 @@ function PostDetailsPage() {
     const [toggleComment, setToggleComment] = useState(false);
     const [comment, setComment] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [likeOrDislike, setLikeOrDislike] = useState('');
+
+    const [, setLikeOrDislike] = useState('');
 
     const { postId } = Route.useParams();
     const {data: post} = useSuspenseQuery(postQueryOptions(postId));
@@ -125,11 +126,16 @@ function PostDetailsPage() {
                             <div className='my-flex-end'>
                                 <button 
                                     onClick={function(){setToggleComment(false); clearError();}} 
-                                    className='margin-top'
+                                    className='margin-top comment-buttons'
                                 >
                                     CANCEL
                                 </button>
-                                <button className='margin-top ml-l'>ADD</button>
+                                <button 
+                                    onClick={function(){addComment(comment, authState.userData.username, postId);}} 
+                                    className='margin-top ml-l comment-buttons'
+                                >
+                                    ADD
+                                </button>
                             </div>
                         </>:<input
                                 className='comment-toggle'

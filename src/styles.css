@@ -203,6 +203,10 @@ button {
     padding: 10px;
 }
 
+.comment-buttons {
+    padding: 4px 8px;
+}
+
 /* utils */
 
 .small-font{
@@ -242,9 +246,10 @@ button {
     font-size: 16px;
 }
 
-.my-nav li:hover {
+.my-nav li:hover, .comment-buttons:hover {
     background-color: rgb(220, 217, 217);
     border-radius: 4px;
+    transition: background-color 0.5s ease;
 }
 
 /* Properties */

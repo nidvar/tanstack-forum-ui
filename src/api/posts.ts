@@ -35,6 +35,15 @@ export const editPost = async function(newPost: NewPost, id: string): Promise<Po
     return res.data;
 }
 
+export const addComment = async function(comment: string, username: string, id: string): Promise<void>{
+    const res = await axiosAPI.post(`posts/${id}/comment`, {
+        comment,
+        username,
+        postId: id
+    });
+    return res.data;
+}
+
 export const likeOrDislikeAPI = async function(likeOrDislike: string, id:string, email: string): Promise<void>{
     const res = await axiosAPI.post(`posts/${id}/likeOrDisLike/${likeOrDislike}`, {
         id,
