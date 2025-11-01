@@ -277,7 +277,11 @@ button {
 }
 
 .margin-top {
-    margin: 10px 0;
+    margin-top: 10px;
+}
+
+.margin-top-xl {
+    margin-top: 40px;
 }
 
 .margin-left {

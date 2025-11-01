@@ -69,7 +69,7 @@ function RouteComponent() {
 
     return (
         <>
-            <div className='main post-details'>
+            <div className='main margin-top-xl'>
                 <Link to='/posts/$postId' params={{ postId: postId }} className='blue underline'>{'<-'} Back to post</Link>
                 <h1>Edit Post</h1>
                 <form className='new-post-form' onSubmit={handleSubmit}>

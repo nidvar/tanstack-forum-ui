@@ -66,7 +66,7 @@ function RouteComponent() {
     };
     return (
         <>
-            <div>
+            <div className='main margin-top-xl'>
                 <h1>Login</h1>
                 <form className='new-post-form' onSubmit={handleSubmit}>
                     <label

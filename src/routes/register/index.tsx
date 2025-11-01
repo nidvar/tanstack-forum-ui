@@ -57,66 +57,68 @@ function RouteComponent() {
 
     return (
         <>
-            <h1>Register</h1>
-            {!complete ?
-                <form className='new-post-form' onSubmit={handleSubmit}>
-                    <label
-                        htmlFor='username'
-                    >
-                        Username
-                    </label>
-                    <input
-                        id='username'
-                        type='text'
-                        value={username}
-                        onChange={function (e) { setUsername(e.target.value), handleChange() }}
-                    />
+            <div className='main margin-top-xl'>
+                <h1>Register</h1>
+                {!complete ?
+                    <form className='new-post-form' onSubmit={handleSubmit}>
+                        <label
+                            htmlFor='username'
+                        >
+                            Username
+                        </label>
+                        <input
+                            id='username'
+                            type='text'
+                            value={username}
+                            onChange={function (e) { setUsername(e.target.value), handleChange() }}
+                        />
 
-                    <label
-                        htmlFor='email'
-                    >
-                        Email
-                    </label>
-                    <input
-                        id='email'
-                        type='email'
-                        value={email}
-                        onChange={function (e) { setEmail(e.target.value), handleChange() }}
-                    />
+                        <label
+                            htmlFor='email'
+                        >
+                            Email
+                        </label>
+                        <input
+                            id='email'
+                            type='email'
+                            value={email}
+                            onChange={function (e) { setEmail(e.target.value), handleChange() }}
+                        />
 
-                    <label
-                        htmlFor='password'
-                    >
-                        Password
-                    </label>
-                    <input
-                        id='password'
-                        type='password'
-                        value={password}
-                        onChange={function (e) { setPassword(e.target.value), handleChange() }}
-                    />
+                        <label
+                            htmlFor='password'
+                        >
+                            Password
+                        </label>
+                        <input
+                            id='password'
+                            type='password'
+                            value={password}
+                            onChange={function (e) { setPassword(e.target.value), handleChange() }}
+                        />
 
-                    <label
-                        htmlFor='confirm-password'
-                    >
-                        Confirm password
-                    </label>
-                    <input
-                        id='confirm-password'
-                        type='password'
-                        value={confirmPassword}
-                        onChange={function (e) { setConfirmPassword(e.target.value), handleChange() }}
-                    />
+                        <label
+                            htmlFor='confirm-password'
+                        >
+                            Confirm password
+                        </label>
+                        <input
+                            id='confirm-password'
+                            type='password'
+                            value={confirmPassword}
+                            onChange={function (e) { setConfirmPassword(e.target.value), handleChange() }}
+                        />
 
-                    <button className='button margin-top' disabled={disable}>REGISTER</button>
-                    <p className='error'>{errorMessage}</p>
-                </form>
-                :
-                <div className='center'>
-                    <p>Registration complete</p>
-                    <Link to='/login' className='blue underline'>Go to Login page</Link>
-                </div>
-            }
+                        <button className='button margin-top' disabled={disable}>REGISTER</button>
+                        <p className='error'>{errorMessage}</p>
+                    </form>
+                    :
+                    <div className='center'>
+                        <p>Registration complete</p>
+                        <Link to='/login' className='blue underline'>Go to Login page</Link>
+                    </div>
+                }
+            </div>
         </>
     )
 }
