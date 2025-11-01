@@ -50,7 +50,7 @@ function RouteComponent() {
                 setErrorMessage(result.error);
             }else{
                 authState.setLoggedIn(true);
-                console.log(result)
+                authState.setUserData(result.data);
                 navigate({ to: '/' });
             }
         } catch (error: any) {

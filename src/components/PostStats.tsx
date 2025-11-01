@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 
-import {likeOrDislikeAPI} from '../api/posts'
+import {likeOrDislikeAPI} from '../api/posts';
+
+import { useAuth } from '../store/authContext';
 
 type PostStatsProps = {
     likeDislike: (choice: 'like' | 'dislike' | 'none') => void;
@@ -12,11 +14,19 @@ type PostStatsProps = {
 
 const PostStats = function ({likes, dislikes, id, email}: PostStatsProps) {
 
+    const authState = useAuth();
+
     const [hoverLike, setHoverLike] = useState(false);
     const [likeChoice, setLikeChoice] = useState(false);
 
     const [hoverDislike, setHoverDislike] = useState(false);
     const [dislikeChoice, setDislikeChoice] = useState(false);
+
+    const likeOrDislike = function(like: string, id: string, email: string){
+        console.log(authState.userData);
+        return
+        likeOrDislikeAPI(like, id, email);
+    }
 
     const chooseDislike = function () {
         const votedState = dislikeChoice;
@@ -24,7 +34,7 @@ const PostStats = function ({likes, dislikes, id, email}: PostStatsProps) {
         setHoverLike(false);
         setLikeChoice(false);
 
-        likeOrDislikeAPI('dislike', id, email)
+        likeOrDislike('dislike', id, email)
     }
 
     const chooseLike = function () {
@@ -33,12 +43,12 @@ const PostStats = function ({likes, dislikes, id, email}: PostStatsProps) {
         setHoverDislike(false);
         setDislikeChoice(false);
 
-        likeOrDislikeAPI('like', id, email)
+        likeOrDislike('like', id, email)
     };
 
     useEffect(()=>{
-        if(!likeChoice && !dislikeChoice){
-            likeOrDislikeAPI('none', id, email)
+        if(!likeChoice && !dislikeChoice && email){
+            likeOrDislike('none', id, email)
         }
     }, [likeChoice, dislikeChoice]);
 
