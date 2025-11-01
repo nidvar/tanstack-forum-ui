@@ -1,4 +1,4 @@
-import { Link } from '@tanstack/react-router';
+import { Link, useNavigate } from '@tanstack/react-router';
 
 import { logout } from '../api/auth';
 
@@ -7,12 +7,14 @@ import { useAuth } from '../store/authContext';
 const Header = function(){
 
     const authState = useAuth();
+    const navigate = useNavigate();
 
     const logoutFn = async function(){
         const result = await logout();
 
         if(result.message && result.message == 'logged out'){
             authState.setLoggedIn(false);
+            navigate({ to: '/logout' });
         }
     }
 
@@ -26,7 +28,7 @@ const Header = function(){
                             <li><Link to='/posts/new'>Create</Link></li>
                             {
                                 authState.loggedIn?
-                                <button onClick={logoutFn}><Link to="/logout">Logout</Link></button>: 
+                                <li><button onClick={logoutFn}>Logout</button></li>: 
                                 <li><Link to="/login">Login</Link></li>
                             }
                         </ul>
