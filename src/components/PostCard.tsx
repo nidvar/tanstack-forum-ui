@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router';
 
 import type {Post} from '../types';
+import { timeAgo } from '../tools/tools';
 
 const PostCard = function({post, link}: {post: Post, link: string}){
     return(
@@ -16,7 +17,7 @@ const PostCard = function({post, link}: {post: Post, link: string}){
                 <Link to={link}>
                     <p>
                         <span className='post-username black'>{post.username} -</span>
-                        <span className='post-time'> {post.createdAt}</span>
+                        <span className='post-time'> {timeAgo(post.createdAt)}</span>
                     </p>
                     <h3>{post.title}</h3>
                     <p>

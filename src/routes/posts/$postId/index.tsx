@@ -6,7 +6,8 @@ import { useState, useRef, useEffect } from 'react';
 import {singlePost, deletePost} from '../../../api/posts';
 import { useAuth } from '../../../store/authContext';
 
-import PostStats from '../../../components/PostStats'
+import PostStats from '../../../components/PostStats';
+import { timeAgo } from '../../../tools/tools';
 
 const postQueryOptions = function(postId: string){
     return queryOptions({
@@ -83,7 +84,7 @@ function PostDetailsPage() {
                     <div>
                         <p>
                             {post.username}
-                            <span className='post-time'> - {post.createdAt}</span>
+                            <span className='post-time'> - {timeAgo(post.createdAt)}</span>
                         </p>
                         <span className='post-tags'>{post.tags.map((item)=> item)}</span>
                     </div>
