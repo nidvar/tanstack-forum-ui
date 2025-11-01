@@ -95,7 +95,7 @@ function PostDetailsPage() {
                 <PostStats likeDislike={grabLikeDislike} likes={post.likes.length} dislikes={post.dislikes.length} id={postId} email={authState.userData.email}/>
 
                 {
-                    authState.loggedIn?(
+                    authState.loggedIn && post.username === authState.userData.username?(
                         <div className='my-flex-end'>
                             <button className='margin-top' onClick={function(){editPost(post._id)}}>
                                 <FaPenToSquare size={18} />
