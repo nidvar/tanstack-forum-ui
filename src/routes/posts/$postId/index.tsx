@@ -81,6 +81,11 @@ function PostDetailsPage() {
         setLikeOrDislike(arg);
     };
 
+    const refreshComments = async function(){
+        const refreshedPost = await singlePost(postId);
+        setCommentsList(refreshedPost.comments);
+    }
+
     const submitComment = async function(){
         setToggleComment(false);
         await addComment(comment, authState.userData.username, postId);
@@ -91,7 +96,9 @@ function PostDetailsPage() {
             username: authState.userData.username,
         }
         arr.push(commentObj);
-        setCommentsList(arr)
+        setComment('')
+        setCommentsList(arr);
+        refreshComments();
     };
 
     const deleteCommentHandler = async function(commentId: string, postId: string){
@@ -108,6 +115,7 @@ function PostDetailsPage() {
         });
 
         setCommentsList(arr2);
+        refreshComments();
     }
 
     useEffect(() => {

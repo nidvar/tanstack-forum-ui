@@ -31,10 +31,6 @@ function RouteComponent() {
         authorProfile();
     }, [profileId]);
 
-    useEffect(()=>{
-        console.log(profile)
-    }, [profile])
-
     return (
         <>
             <div className='main margin-top-xl center'>

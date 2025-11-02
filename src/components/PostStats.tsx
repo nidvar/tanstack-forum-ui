@@ -23,7 +23,6 @@ const PostStats = function ({likes, dislikes, id, email}: PostStatsProps) {
     const [dislikeChoice, setDislikeChoice] = useState(false);
 
     const likeOrDislike = function(like: string, id: string, email: string){
-        console.log(authState.userData);
         return
         likeOrDislikeAPI(like, id, email);
     }
