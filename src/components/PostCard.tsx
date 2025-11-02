@@ -8,11 +8,11 @@ const PostCard = function({post, link}: {post: Post, link: string}){
         <>
             <div className='post' key={post._id} >
                 <div className='post-card-img-thumbnail'>
-                    <Link to={link}>
-                        {
-                            post.img?.url? <img src={post.img.url} alt={post.title} />: <div className='post-card-img-placeholder'>📄</div>
-                        }
-                    </Link>
+                    {
+                        post.img?.url? 
+                        <img src={post.img.url} alt={post.title} className='postcard-img'/>: 
+                        <div className='post-card-img-placeholder'>📄</div>
+                    }
                 </div>
                 <Link to={link}>
                     <p>
