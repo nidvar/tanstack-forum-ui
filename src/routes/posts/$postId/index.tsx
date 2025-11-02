@@ -4,6 +4,8 @@ import { FaTrash, FaPenToSquare } from "react-icons/fa6";
 import { useState, useRef, useEffect } from 'react';
 
 import {singlePost, deletePost, addComment} from '../../../api/posts';
+import {grabProfile} from '../../../api/profile';
+
 import { useAuth } from '../../../store/authContext';
 
 import PostStats from '../../../components/PostStats';
@@ -38,11 +40,18 @@ function PostDetailsPage() {
     const [comment, setComment] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
+    const [postAuthor, setPostAuthor] = useState('');
+
     const [, setLikeOrDislike] = useState('');
 
     const { postId } = Route.useParams();
 
     const {data:post} = useSuspenseQuery(postQueryOptions(postId));
+
+    const authorProfile = async function(){
+        const author = await grabProfile(post.username);
+        setPostAuthor(author.profilePic);
+    }
 
     const postDelete = async function(id: string){
         setDisable(true);
@@ -69,11 +78,14 @@ function PostDetailsPage() {
     };
 
     useEffect(() => {
-        console.log('posts page')
         if (toggleComment) {
             textareaRef.current?.focus();
         }
     }, [toggleComment]);
+
+    useEffect(()=>{
+        authorProfile();
+    }, []);
 
 
     return (
@@ -83,7 +95,7 @@ function PostDetailsPage() {
                 <div className='post-header'>
                     <div className='profile-icon'>
                         <Link to={'/profile/' + post.username}>
-                            <img src={'/blank_profile.jpg'} />
+                            <img src={postAuthor || 'blank_profile.jpg'} />
                         </Link>
                     </div>
                     <div>
