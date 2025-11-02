@@ -1,14 +1,7 @@
 import type { Post, NewPost } from '../types';
 import axiosAPI from "@/lib/axios";
 
-export const singlePost = async function (postId: string): Promise<{
-    data: Post;
-    postAuthor: {
-        username: string
-        createdAt: string
-        profilePic: string
-    }
-}>{
+export const singlePost = async function (postId: string): Promise<Post>{
     const res = await axiosAPI.get(`posts/${postId}`);
     return res.data;
 }
@@ -60,3 +53,4 @@ export const likeOrDislikeAPI = async function(likeOrDislike: string, id:string,
 
     return res.data;
 }
+

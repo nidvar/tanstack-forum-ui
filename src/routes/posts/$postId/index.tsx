@@ -42,11 +42,7 @@ function PostDetailsPage() {
 
     const { postId } = Route.useParams();
 
-    const payload = useSuspenseQuery(postQueryOptions(postId));
-
-    const post = payload.data.data;
-    const postAuthor = payload.data.postAuthor
-
+    const {data:post} = useSuspenseQuery(postQueryOptions(postId));
 
     const postDelete = async function(id: string){
         setDisable(true);
@@ -87,7 +83,7 @@ function PostDetailsPage() {
                 <div className='post-header'>
                     <div className='profile-icon'>
                         <Link to={'/profile/' + post.username}>
-                            <img src={postAuthor.profilePic || '/blank_profile.jpg'} />
+                            <img src={'/blank_profile.jpg'} />
                         </Link>
                     </div>
                     <div>
