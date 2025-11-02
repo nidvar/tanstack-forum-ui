@@ -57,10 +57,12 @@ function NewPostPage() {
         const formData = {
             title,
             content,
-            tags: [...tagsArray]
+            tags: [...tagsArray],
+            img:{
+                url: 'https://static.photos/blurred/640x360/' + Math.random() * 10,
+                public_id: ''
+            }
         };
-
-        console.log(formData);
 
         try{
             await createNewPost(formData);

@@ -109,8 +109,11 @@ function PostDetailsPage() {
                     </div>
                 </div>
 
-                <h2>{post.title}</h2>
-                <p>{post.content}</p>
+                <div className='post-content'>
+                    <h2>{post.title}</h2>
+                    <img src={post.img?.url} />
+                    <p>{post.content}</p>
+                </div>
 
                 <PostStats likeDislike={grabLikeDislike} likes={post.likes.length} dislikes={post.dislikes.length} id={postId} email={authState.userData.email}/>
 
