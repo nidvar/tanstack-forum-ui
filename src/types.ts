@@ -1,3 +1,9 @@
+export type Comment = {
+    postId: string
+    comment: string
+    username: string
+}
+
 export type Post = {
     _id: string
     title: string
@@ -6,7 +12,7 @@ export type Post = {
         url?: string;
         public_id?: string;
     };
-    comments: string[]
+    comments: Comment[]
     likes: string[]
     dislikes: string[]
     tags: string[]

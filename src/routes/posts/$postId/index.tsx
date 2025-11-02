@@ -11,6 +11,8 @@ import { useAuth } from '../../../store/authContext';
 import PostStats from '../../../components/PostStats';
 import { timeAgo } from '../../../tools/tools';
 
+import CommentsCard from '../../../components/CommentsCard';
+
 const postQueryOptions = function(postId: string){
     return queryOptions({
         queryKey: ['post', postId],
@@ -45,8 +47,9 @@ function PostDetailsPage() {
     const [, setLikeOrDislike] = useState('');
 
     const { postId } = Route.useParams();
-
     const {data:post} = useSuspenseQuery(postQueryOptions(postId));
+
+    const [commentsList, setCommentsList] = useState(post.comments || [])
 
     const authorProfile = async function(){
         const author = await grabProfile(post.username);
@@ -77,9 +80,17 @@ function PostDetailsPage() {
         setLikeOrDislike(arg);
     };
 
-    const submitComment = function(){
-        addComment(comment, authState.userData.username, postId)
+    const submitComment = async function(){
         setToggleComment(false);
+        await addComment(comment, authState.userData.username, postId);
+        const arr= [...post.comments];
+        const commentObj = {
+            postId,
+            comment,
+            username: authState.userData.username,
+        }
+        arr.push(commentObj);
+        setCommentsList(arr)
     }
 
     useEffect(() => {
@@ -91,6 +102,10 @@ function PostDetailsPage() {
     useEffect(()=>{
         authorProfile();
     }, []);
+
+    useEffect(()=>{
+        console.log(commentsList)
+    }, [commentsList])
 
 
     return (
@@ -171,6 +186,13 @@ function PostDetailsPage() {
                             />
                 }
                 <p>{errorMessage}</p>
+            </div>
+            <div className='display-comments'>
+                {commentsList.map((item)=>{
+                    return (
+                        <CommentsCard username={item.username} comment={item} key={item.postId + Math.random()} />
+                    )
+                })}
             </div>
         </>
     )

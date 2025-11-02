@@ -231,6 +231,18 @@ p {
     padding: 4px 8px;
 }
 
+.single-comment {
+    margin: 10px auto;
+    display: flex;
+    max-width: 800px;
+}
+
+.single-comment-profile {
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
+}
+
 /* utils */
 
 .small-font{
@@ -341,4 +353,14 @@ p {
 .icon {
     width: 18px;
     height: 18px;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.bold {
+    color: black;
+    font-weight: 600;
 }
