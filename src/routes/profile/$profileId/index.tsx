@@ -29,7 +29,7 @@ function RouteComponent() {
 
     useEffect(()=>{
         authorProfile();
-    }, []);
+    }, [profileId]);
 
     useEffect(()=>{
         console.log(profile)
