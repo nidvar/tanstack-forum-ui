@@ -77,6 +77,11 @@ function PostDetailsPage() {
         setLikeOrDislike(arg);
     };
 
+    const submitComment = function(){
+        addComment(comment, authState.userData.username, postId)
+        setToggleComment(false);
+    }
+
     useEffect(() => {
         if (toggleComment) {
             textareaRef.current?.focus();
@@ -152,7 +157,7 @@ function PostDetailsPage() {
                                     CANCEL
                                 </button>
                                 <button 
-                                    onClick={function(){addComment(comment, authState.userData.username, postId);}} 
+                                    onClick={function(){submitComment();}} 
                                     className='margin-top ml-l comment-buttons'
                                 >
                                     ADD

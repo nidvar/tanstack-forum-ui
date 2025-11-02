@@ -211,6 +211,7 @@ p {
     padding: 15px;
     margin: auto;
     max-width: 800px;
+    margin-bottom: 20px;
 }
 
 .comment-toggle {
