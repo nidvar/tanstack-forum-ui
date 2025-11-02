@@ -3,13 +3,14 @@ import { grabProfile } from '../api/profile';
 import {useState, useEffect} from 'react';
 
 import { timeAgo } from '../tools/tools';
+import { FaTrash } from "react-icons/fa6";
 
 type Comment = {
     postId: string
     comment: string
     username: string
     createdAt?: string
-    id?: string
+    _id?: string
     updatedAt?: string
 }
 
@@ -20,30 +21,30 @@ type Profile = {
     lastLogIn: string
 }
 
-const CommentsCard = function({comment, username}: {comment: Comment, username: string}){
-    
+const CommentsCard = function({comment, username, deleteComment}: {comment: Comment, username: string, deleteComment: Function}){
     const [profile, setProfile] = useState<Profile | null>(null)
-    
     const getProfile = async function(){
         const profile = await grabProfile(username);
         setProfile(profile);
     };
-
     useEffect(()=>{
         getProfile();
     }, [])
 
     return(
         <>
-
             <div className='single-comment'>
-                <img src={profile?.profilePic || '/blank_profile.jpg'}  className='single-comment-profile'/>
-                <div>
-                    <p><span className='bold'>{username}</span> - <span className='post-time'>{timeAgo(comment.createdAt || '')}</span></p>
-                    <p>{comment.comment}</p>
+                <div className='flex'>
+                    <img src={profile?.profilePic || '/blank_profile.jpg'}  className='single-comment-profile'/>
+                    <div>
+                        <p><span className='bold'>{username}</span> - <span className='post-time'>{timeAgo(comment.createdAt || '')}</span></p>
+                        <p>{comment.comment}</p>
+                    </div>
                 </div>
+                <button onClick={function(){deleteComment(comment._id || '', comment.postId)}}>
+                    <FaTrash size={12} />
+                </button>
             </div>
-            
         </>
     )
 }

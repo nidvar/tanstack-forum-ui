@@ -3,7 +3,8 @@ import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
 import { FaTrash, FaPenToSquare } from "react-icons/fa6";
 import { useState, useRef, useEffect } from 'react';
 
-import {singlePost, deletePost, addComment} from '../../../api/posts';
+import {singlePost, deletePost, addComment, deleteComment} from '../../../api/posts';
+
 import {grabProfile} from '../../../api/profile';
 
 import { useAuth } from '../../../store/authContext';
@@ -91,6 +92,22 @@ function PostDetailsPage() {
         }
         arr.push(commentObj);
         setCommentsList(arr)
+    };
+
+    const deleteCommentHandler = async function(commentId: string, postId: string){
+        await deleteComment(commentId || '', postId);
+        
+        const arr = commentsList;
+
+        const arr2 = arr.filter((item)=>{
+            if(item._id == commentId){
+                return false
+            }else{
+                return true
+            }
+        });
+
+        setCommentsList(arr2);
     }
 
     useEffect(() => {
@@ -102,10 +119,6 @@ function PostDetailsPage() {
     useEffect(()=>{
         authorProfile();
     }, []);
-
-    useEffect(()=>{
-        console.log(commentsList)
-    }, [commentsList])
 
 
     return (
@@ -190,7 +203,7 @@ function PostDetailsPage() {
             <div className='display-comments'>
                 {commentsList.map((item)=>{
                     return (
-                        <CommentsCard username={item.username} comment={item} key={item.postId + Math.random()} />
+                        <CommentsCard username={item.username} comment={item} key={item.postId + Math.random()} deleteComment={deleteCommentHandler}/>
                     )
                 })}
             </div>

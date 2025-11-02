@@ -50,7 +50,12 @@ export const likeOrDislikeAPI = async function(likeOrDislike: string, id:string,
         likeOrDislike,
         email
     });
-
     return res.data;
 }
 
+export const deleteComment = async function(id: string, postId: string){
+    const res = await axiosAPI.post('posts/comment/delete/' + id, {
+        postId
+    });
+    return res.data;
+}

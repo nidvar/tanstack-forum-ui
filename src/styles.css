@@ -235,6 +235,7 @@ p {
     margin: 10px auto;
     display: flex;
     max-width: 800px;
+    justify-content: space-between;
 }
 
 .single-comment-profile {

@@ -2,6 +2,7 @@ export type Comment = {
     postId: string
     comment: string
     username: string
+    _id?: string
 }
 
 export type Post = {
