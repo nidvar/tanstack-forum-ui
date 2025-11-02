@@ -25,7 +25,7 @@ function RouteComponent() {
         setErrorMessage('')
     }
 
-    const handleSubmit = function(e: React.FormEvent<HTMLFormElement>){
+    const handleSubmit = async function(e: React.FormEvent<HTMLFormElement>){
         e.preventDefault();
 
         const tagsArray: string[] = [];
@@ -50,7 +50,7 @@ function RouteComponent() {
             content,
             tags: [...tagsArray]
         };
-        editPost(formData, postId);
+        await editPost(formData, postId);
         navigate({ to: '/' });
         setDisableButton(true);
     }

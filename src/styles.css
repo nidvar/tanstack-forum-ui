@@ -244,6 +244,10 @@ p {
     margin-right: 10px;
 }
 
+.display-comments {
+    margin-bottom: 40px;
+}
+
 /* utils */
 
 .small-font{
