@@ -5,6 +5,7 @@ import {allPosts} from '../api/posts';
 import type {Post} from '../types';
 
 import PostCard from '@/components/PostCard';
+import React from 'react';
 
 export const Route = createFileRoute('/')({
     component: App,
@@ -41,10 +42,10 @@ function App() {
             <div className='posts-list-column'>
                 {posts.map((item)=>{
                     return(
-                        <>
+                        <React.Fragment key={item._id}>
                             <PostCard post={item} key={item._id} link={'./posts/' + item._id}/>
                             <div className='horizontal-line'></div>
-                        </>
+                        </React.Fragment>
                     )
                 })}
             </div>
