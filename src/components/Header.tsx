@@ -25,10 +25,10 @@ const Header = function(){
                     <div className="my-logo"><Link to="/">Home</Link></div>
                     <nav className="my-nav">
                         <ul>
-                            <li><Link to='/posts/new'>Create</Link></li>
                             {
                                 authState.loggedIn? (
                                     <>
+                                        <li><Link to='/posts/new'>Create</Link></li>
                                         <li>
                                             <Link to={"/profile/" + authState.userData.username}>
                                                 {authState.userData.username}

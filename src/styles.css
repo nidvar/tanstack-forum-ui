@@ -36,9 +36,40 @@ p {
 }
 
 .main {
-    max-width: 1200px;
+    max-width: 1000px;
     padding: 15px;
     margin: 15px auto;
+}
+
+/* header */
+
+.my-header {
+    box-shadow: 0 1px 10px rgba(0,0,0,0.2);
+}
+
+.my-inner-header {
+    max-width: 1000px;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    padding: 12px 0;
+}
+
+.my-nav ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+.my-nav li, .my-logo {
+    margin: 0 15px;
+    padding: 4px 0;
+    font-size: 16px;
+}
+
+.my-nav li:hover, .comment-buttons:hover {
+    background-color: rgb(220, 217, 217);
+    border-radius: 4px;
+    transition: background-color 0.5s ease;
 }
 
 .logout-page {
@@ -260,37 +291,6 @@ p {
     color: white;
     padding: 4px 6px;
     border-radius: 4px;
-}
-
-/* header */
-
-.my-header {
-    box-shadow: 0 1px 10px rgba(0,0,0,0.2);
-}
-
-.my-inner-header {
-    max-width: 1600px;
-    display: flex;
-    justify-content: space-between;
-    margin: auto;
-    padding: 12px 15px;
-}
-
-.my-nav ul {
-    display: flex;
-    justify-content: space-between;
-}
-
-.my-nav li, .my-logo {
-    margin: 0 15px;
-    padding: 4px 8px;
-    font-size: 16px;
-}
-
-.my-nav li:hover, .comment-buttons:hover {
-    background-color: rgb(220, 217, 217);
-    border-radius: 4px;
-    transition: background-color 0.5s ease;
 }
 
 /* Properties */
