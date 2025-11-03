@@ -26,7 +26,7 @@ function App() {
     return (
         <div className='main'>
             <h1>Forum</h1>
-            <p className='center margin-bottom-lg'>React | TypeScript | Node | MongoDB | JWT</p>
+            <p className='center'>React | TypeScript | Node | MongoDB | JWT</p>
             <div className='search-container'>
                 <input 
                     className='search-input'
