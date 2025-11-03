@@ -1,5 +1,6 @@
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
-import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
+import { queryOptions, useSuspenseQuery, useQueryClient } from '@tanstack/react-query';
+
 import { FaTrash, FaPenToSquare } from "react-icons/fa6";
 import { useState, useRef, useEffect } from 'react';
 
@@ -32,7 +33,7 @@ export const Route = createFileRoute('/posts/$postId/')({
 })
 
 function PostDetailsPage() {
-
+    const queryClient = useQueryClient();
     const authState = useAuth();
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
@@ -103,6 +104,14 @@ function PostDetailsPage() {
 
     const deleteCommentHandler = async function(commentId: string, postId: string){
         await deleteComment(commentId || '', postId);
+
+        queryClient.setQueryData(['post', postId], (old: any) => {
+            if (!old || !old.comments) return old; // guard against undefined
+            return {
+                ...old,
+                comments: old.comments.filter((c: any) => c._id !== commentId)
+            }
+        });
         
         const arr = commentsList;
 
@@ -126,6 +135,7 @@ function PostDetailsPage() {
 
     useEffect(()=>{
         authorProfile();
+        refreshComments();
     }, []);
 
 

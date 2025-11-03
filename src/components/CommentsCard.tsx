@@ -1,4 +1,5 @@
 import { grabProfile } from '../api/profile';
+import { useAuth } from '../store/authContext';
 
 import {useState, useEffect} from 'react';
 
@@ -22,14 +23,27 @@ type Profile = {
 }
 
 const CommentsCard = function({comment, username, deleteComment}: {comment: Comment, username: string, deleteComment: Function}){
-    const [profile, setProfile] = useState<Profile | null>(null)
+
+    const authState = useAuth();
+    const [profile, setProfile] = useState<Profile | null>(null);
+    const [deleteAble, setDeleteAble] = useState(false);
     const getProfile = async function(){
         const profile = await grabProfile(username);
         setProfile(profile);
     };
+    
     useEffect(()=>{
-        getProfile();
-    }, [])
+        const asyncHandler = async function(){
+            await getProfile();
+        };
+        asyncHandler();
+    }, []);
+
+    useEffect(()=>{
+        if(profile?.username === authState.userData.username){
+            setDeleteAble(true);
+        }
+    }, [profile])
 
     return(
         <>
@@ -41,9 +55,15 @@ const CommentsCard = function({comment, username, deleteComment}: {comment: Comm
                         <p>{comment.comment}</p>
                     </div>
                 </div>
-                <button onClick={function(){deleteComment(comment._id || '', comment.postId)}}>
-                    <FaTrash size={12} />
-                </button>
+                {
+                    deleteAble?  (
+                        <>
+                            <button onClick={function(){deleteComment(comment._id || '', comment.postId)}}>
+                                <FaTrash size={12} />
+                            </button>
+                        </>
+                    ):''
+                }
             </div>
         </>
     )
