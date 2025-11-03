@@ -168,20 +168,21 @@ function PostDetailsPage() {
                     <p>{post.content}</p>
                 </div>
 
-                <PostStats likeDislike={grabLikeDislike} likes={post.likes.length} dislikes={post.dislikes.length} id={postId} email={authState.userData.email}/>
-
-                {
-                    authState.loggedIn && post.username === authState.userData.username?(
-                        <div className='my-flex-end'>
-                            <button className='margin-top' onClick={function(){editPost(post._id)}}>
-                                <FaPenToSquare size={18} />
-                            </button>
-                            <button className='margin-top ml-l' onClick={function(){postDelete(post._id)}} disabled={disable}>
-                                <FaTrash size={18} />
-                            </button>
-                        </div>
-                    ):''
-                }
+                <div className='post-stats-and-icon'>
+                    <PostStats likeDislike={grabLikeDislike} likes={post.likes.length} dislikes={post.dislikes.length} id={postId} email={authState.userData.email}/>
+                    {
+                        authState.loggedIn && post.username === authState.userData.username?(
+                            <div className='my-flex-end delete-edit-post'>
+                                <button onClick={function(){editPost(post._id)}}>
+                                    <FaPenToSquare size={18} />
+                                </button>
+                                <button onClick={function(){postDelete(post._id)}} disabled={disable}>
+                                    <FaTrash size={18} />
+                                </button>
+                            </div>
+                        ):''
+                    }
+                </div>
 
             </div>
 

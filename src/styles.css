@@ -116,6 +116,12 @@ p {
 
 /* post */
 
+.post-stats-and-icon {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .post-username, .post-tags {
     font-weight: 300;
     font-size: 14px;
@@ -233,7 +239,12 @@ p {
     display: flex;
     gap: 10px;
     width: 200px;
-    margin: 15px 0;
+}
+
+.post-stats div{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .profile-img {
@@ -398,4 +409,13 @@ p {
 .bold {
     color: black;
     font-weight: 600;
+}
+
+.delete-edit-post {
+    display: flex;
+    gap: 10px;
+}
+
+.number-of-comments {
+    margin-left: 20px;
 }

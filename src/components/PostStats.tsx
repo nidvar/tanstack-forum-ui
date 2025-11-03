@@ -83,7 +83,7 @@ const PostStats = function ({likes, dislikes, id, email}: PostStatsProps) {
                         <img onClick={function () { chooseDislike() }} className='icon' src="/disliked.ico" />
                 }{dislikes}
 
-                <div>
+                <div className='number-of-comments'>
                     <img className='icon' src="/comments.ico" />
                 </div>
             </div>
