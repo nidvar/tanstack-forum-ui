@@ -26,6 +26,18 @@ function App() {
         <div className='main'>
             <h1>Forum</h1>
             <p className='center margin-bottom-lg'>React | TypeScript | Node | MongoDB | JWT</p>
+            <div className='search-container'>
+                <input 
+                    className='search-input'
+                    placeholder='search'
+                />
+                <select className='filter-select'>
+                    <option value='all'>Latest</option>
+                    <option value='react'>Oldest</option>
+                    <option value='react'>Most Commented</option>
+                    <option value='react'>Most Liked</option>
+                </select>
+            </div>
             <div className='posts-list-column'>
                 {posts.map((item)=>{
                     return(
