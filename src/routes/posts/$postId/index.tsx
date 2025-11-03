@@ -60,8 +60,8 @@ function PostDetailsPage() {
     const postDelete = async function(id: string){
         setDisable(true);
         try{
-            deletePost(id);
-            await navigate({ to: '/' });
+            await deletePost(id);
+            navigate({ to: '/' });
         }catch(error){
             console.log(error);
         }finally{
