@@ -162,7 +162,9 @@ function PostDetailsPage() {
 
                 <div className='post-content'>
                     <h2>{post.title}</h2>
-                    <img src={post.img?.url} />
+                    <div className='post-image-upload-container'>
+                        <img src={post.img?.url} className='post-image-upload'/>
+                    </div>
                     <p>{post.content}</p>
                 </div>
 
