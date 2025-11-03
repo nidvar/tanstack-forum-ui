@@ -141,25 +141,28 @@ function PostDetailsPage() {
 
     return (
         <>
-            <div className='main post-details'>
-                <Link to='/' className='blue underline'>{'<-'} Back to posts</Link>
-                <div className='post-header'>
-                    <div className='profile-icon'>
-                        <Link to={'/profile/' + post.username}>
-                            <img src={postAuthor || 'blank_profile.jpg'} />
-                        </Link>
-                    </div>
-                    <div>
-                        <p>
-                            <Link to={'/profile/' + post.username}>
-                                {post.username}
-                                <span className='post-time'> - {timeAgo(post.createdAt)}</span>
-                            </Link>
-                        </p>
-                        <span className='post-tags'>{post.tags.map((item: any)=> item)}</span>
-                    </div>
+            <div className='post-header'>
+                <div className='profile-icon back'>
+                    <Link to='/'>
+                        <img src='/back.png' />
+                    </Link>
                 </div>
-
+                <div className='profile-icon'>
+                    <Link to={'/profile/' + post.username}>
+                        <img src={postAuthor || 'blank_profile.jpg'} />
+                    </Link>
+                </div>
+                <div>
+                    <p>
+                        <Link to={'/profile/' + post.username}>
+                            {post.username}
+                            <span className='post-time'> - {timeAgo(post.createdAt)}</span>
+                        </Link>
+                    </p>
+                    <span className='post-tags'>{post.tags.map((item: any)=> item)}</span>
+                </div>
+            </div>
+            <div className='main-post post-details'>
                 <div className='post-content'>
                     <h2>{post.title}</h2>
                     <div className='post-image-upload-container'>
