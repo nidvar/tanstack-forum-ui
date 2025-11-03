@@ -6,7 +6,7 @@ import { timeAgo } from '../tools/tools';
 const PostCard = function({post, link}: {post: Post, link: string}){
     return(
         <>
-            <div className='post' key={post._id} >
+            <Link to={link} key={post._id} className='post'>
                 <div className='post-card-img-thumbnail'>
                     {
                         post.img?.url? 
@@ -14,7 +14,7 @@ const PostCard = function({post, link}: {post: Post, link: string}){
                         <div className='post-card-img-placeholder'>📄</div>
                     }
                 </div>
-                <Link to={link}>
+                <div>
                     <p>
                         <span className='post-username black'>{post.username} -</span>
                         <span className='post-time'> {timeAgo(post.createdAt)}</span>
@@ -23,8 +23,8 @@ const PostCard = function({post, link}: {post: Post, link: string}){
                     <p>
                         {post.tags.length > 0? post.tags.map((item, index)=>{ return <span key={post._id + index} className='post-card-tags'>{item}</span> }):'' }
                     </p>
-                </Link>
-            </div>
+                </div>
+            </Link>
         </>
     )
 };

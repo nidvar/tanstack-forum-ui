@@ -41,7 +41,10 @@ function App() {
             <div className='posts-list-column'>
                 {posts.map((item)=>{
                     return(
-                        <PostCard post={item} key={item._id} link={'./posts/' + item._id}/>
+                        <>
+                            <PostCard post={item} key={item._id} link={'./posts/' + item._id}/>
+                            <div className='horizontal-line'></div>
+                        </>
                     )
                 })}
             </div>
