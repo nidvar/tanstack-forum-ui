@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 
 import {likeOrDislikeAPI} from '../api/posts';
 
-import { useAuth } from '../store/authContext';
-
 type PostStatsProps = {
     likeDislike: (choice: 'like' | 'dislike' | 'none') => void;
     likes: number
@@ -13,8 +11,6 @@ type PostStatsProps = {
 }
 
 const PostStats = function ({likes, dislikes, id, email}: PostStatsProps) {
-
-    const authState = useAuth();
 
     const [hoverLike, setHoverLike] = useState(false);
     const [likeChoice, setLikeChoice] = useState(false);
