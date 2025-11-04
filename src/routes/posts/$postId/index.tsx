@@ -172,7 +172,14 @@ function PostDetailsPage() {
                 </div>
 
                 <div className='post-stats-and-icon'>
-                    <PostStats likeDislike={grabLikeDislike} likes={post.likes.length} dislikes={post.dislikes.length} id={postId} email={authState.userData.email}/>
+                    <PostStats 
+                        likeDislike={grabLikeDislike} 
+                        likes={post.likes.length} 
+                        dislikes={post.dislikes.length} 
+                        noOfComments={post.comments.length}
+                        id={postId} 
+                        email={authState.userData.email}
+                    />
                     {
                         authState.loggedIn && post.username === authState.userData.username?(
                             <div className='my-flex-end delete-edit-post'>

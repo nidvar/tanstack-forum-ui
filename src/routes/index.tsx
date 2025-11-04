@@ -1,11 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {allPosts} from '../api/posts';
 
 import type {Post} from '../types';
 
 import PostCard from '@/components/PostCard';
-import React from 'react';
 
 export const Route = createFileRoute('/')({
     component: App,

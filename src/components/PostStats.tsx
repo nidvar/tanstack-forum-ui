@@ -8,9 +8,10 @@ type PostStatsProps = {
     dislikes: number
     id: string
     email: string
+    noOfComments: number
 }
 
-const PostStats = function ({likes, dislikes, id, email}: PostStatsProps) {
+const PostStats = function ({likes, dislikes, id, email, noOfComments}: PostStatsProps) {
 
     const [hoverLike, setHoverLike] = useState(false);
     const [likeChoice, setLikeChoice] = useState(false);
@@ -86,6 +87,7 @@ const PostStats = function ({likes, dislikes, id, email}: PostStatsProps) {
                 <div className='number-of-comments'>
                     <img className='icon' src="/comments.ico" />
                 </div>
+                {noOfComments}
             </div>
         </>
     )
