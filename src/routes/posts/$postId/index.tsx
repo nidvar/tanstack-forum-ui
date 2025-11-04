@@ -89,6 +89,17 @@ function PostDetailsPage() {
 
     const submitComment = async function(){
         setToggleComment(false);
+        clearError();
+        if(authState.userData.email == ''){
+            setErrorMessage('Please login to comment')
+            return
+        };
+
+        if(comment.trim() === ''){
+            setErrorMessage('Field cannot be blank')
+            return
+        };
+
         await addComment(comment, authState.userData.username, postId);
         const arr= [...post.comments];
         const commentObj = {
@@ -229,7 +240,7 @@ function PostDetailsPage() {
                                 onClick={function(){setToggleComment(true); clearError();}}
                             />
                 }
-                <p>{errorMessage}</p>
+                <p className='error margin-top'>{errorMessage}</p>
             </div>
             <div className='display-comments'>
                 {commentsList.map((item)=>{
