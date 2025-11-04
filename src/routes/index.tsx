@@ -40,6 +40,15 @@ function App() {
                 </select>
             </div>
             <div className='posts-list-column'>
+                {
+                    posts.length === 0? (
+                        <div className='center margin-top'>
+                            <p>Loading data....</p>
+                            <p>Free tier server sleeps from inactivity.</p>
+                            <p>May take a few minutes.</p>
+                        </div>
+                    ):''
+                }
                 {posts.map((item)=>{
                     return(
                         <React.Fragment key={item._id}>
