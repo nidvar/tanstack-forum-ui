@@ -176,7 +176,7 @@ function PostDetailsPage() {
                         likeDislike={grabLikeDislike} 
                         likes={post.likes.length} 
                         dislikes={post.dislikes.length} 
-                        noOfComments={post.comments.length}
+                        noOfComments={commentsList.length}
                         id={postId} 
                         email={authState.userData.email}
                     />
