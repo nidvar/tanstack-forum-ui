@@ -12,10 +12,36 @@ export const Route = createFileRoute('/')({
 
 function App() {
     const [posts, setPosts] = useState<Post[]>([]);
+    const [searchedPosts, setSearchedPosts] = useState<Post[]>([]);
+
+    const handleSearch = function(e: React.ChangeEvent<HTMLInputElement>){
+        const arr = posts.filter((item)=>{
+            if(item.title.includes(e.target.value)){
+                return true;
+            }else{
+                return false;
+            }
+        });
+        setSearchedPosts(arr);
+    };
+
+    const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        // Clone the array first
+        const arr = [...searchedPosts];
+
+        if (e.target.value === 'oldest') {
+            arr.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+        } else {
+            arr.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        }
+
+        setSearchedPosts(arr);
+    };
 
     const loadPosts = async function(){
         const posts = await allPosts();
         setPosts(posts);
+        setSearchedPosts(posts);
     }
 
     useEffect(()=>{
@@ -30,12 +56,16 @@ function App() {
                 <input 
                     className='search-input'
                     placeholder='search'
+                    onChange={function(e){handleSearch(e)}}
                 />
-                <select className='filter-select'>
-                    <option value='all'>Latest</option>
-                    <option value='react'>Oldest</option>
-                    <option value='react'>Most Commented</option>
-                    <option value='react'>Most Liked</option>
+                <select 
+                    className='filter-select'
+                    onChange={function(e){handleSort(e)}}
+                >
+                    <option value='latest'>Latest</option>
+                    <option value='oldest'>Oldest</option>
+                    {/* <option value='commented'>Most Commented</option>
+                    <option value='liked'>Most Liked</option> */}
                 </select>
             </div>
             <div className='posts-list-column'>
@@ -48,14 +78,16 @@ function App() {
                         </div>
                     ):''
                 }
-                {posts.map((item)=>{
-                    return(
-                        <React.Fragment key={item._id}>
-                            <PostCard post={item} key={item._id} link={'./posts/' + item._id}/>
-                            <div className='horizontal-line'></div>
-                        </React.Fragment>
-                    )
-                })}
+                {
+                    searchedPosts.map((item)=>{
+                        return(
+                            <React.Fragment key={item._id}>
+                                <PostCard post={item} key={item._id} link={'./posts/' + item._id}/>
+                                <div className='horizontal-line'></div>
+                            </React.Fragment>
+                        )
+                    })
+                }
             </div>
         </div>
     )
