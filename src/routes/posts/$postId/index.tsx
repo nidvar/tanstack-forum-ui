@@ -170,14 +170,18 @@ function PostDetailsPage() {
                             <span className='post-time'> - {timeAgo(post.createdAt)}</span>
                         </Link>
                     </p>
-                    <span className='post-tags'>{post.tags.map((item: any)=> item)}</span>
+                    {
+                        post.tags.length > 0?
+                        <span className='post-tags'>{post.tags.map((item: any)=> item)}</span>:
+                        ''
+                    }
                 </div>
             </div>
             <div className='main-post post-details'>
                 <div className='post-content'>
                     <h2>{post.title}</h2>
                     <div className='post-image-upload-container'>
-                        <img src={post.img?.url} className='post-image-upload'/>
+                        <img src={post.img?.url || undefined} className='post-image-upload'/>
                     </div>
                     <p>{post.content}</p>
                 </div>

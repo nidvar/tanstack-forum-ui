@@ -19,7 +19,7 @@ function RouteComponent() {
     const [errorMessage, setErrorMessage] = useState('');
 
     const [complete, setComplete] = useState(false);
-    const [image, setImage] = useState('');
+    const [profilePic, setProfilePic] = useState('');
 
     const handleChange = function () {
         setErrorMessage('');
@@ -37,7 +37,7 @@ function RouteComponent() {
             reader.onloadend = async ()=>{
                 const base64Image = reader.result;
                 if(typeof base64Image === 'string'){
-                    setImage(base64Image);
+                    setProfilePic(base64Image);
                 }
             }
         };
@@ -60,18 +60,23 @@ function RouteComponent() {
         const newUser = {
             username,
             password,
-            email
+            email,
+            profilePic
         };
 
         try {
-            registerUser(newUser);
-            setComplete(true);
+            const res = await registerUser(newUser);
+            if(res && res.message ==='User registered successfully'){
+                setComplete(true);
+            }else{
+                setErrorMessage(res.error)
+                throw new Error(res);
+            }
         } catch (error) {
-            console.log('register new user error ===>', error)
+            console.log(error);
         } finally {
             setDisable(false);
         }
-
     };
 
     return (
@@ -82,7 +87,7 @@ function RouteComponent() {
                     <form className='new-post-form' onSubmit={handleSubmit}>
 
                         <img 
-                            src={image || "blank_profile.jpg"}
+                            src={profilePic || "blank_profile.jpg"}
                             className='profile-image-upload'
                         />
 

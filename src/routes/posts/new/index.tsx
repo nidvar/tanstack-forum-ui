@@ -80,8 +80,8 @@ function NewPostPage() {
             content,
             tags: [...tagsArray],
             img:{
-                url: 'https://static.photos/blurred/640x360/' + Math.random() * 10,
-                public_id: ''
+                url: image,
+                public_id: '' + Math.random() * 10
             }
         };
 
