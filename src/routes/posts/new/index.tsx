@@ -25,21 +25,42 @@ function NewPostPage() {
     const [disable, setDisable] = useState(false);
 
     const [errorMessage, setErrorMessage] = useState('');
+    const [image, setImage] = useState('');
 
     const clearError = function(){
         setErrorMessage('')
     }
 
+    const handleImageUpload = function(e: React.ChangeEvent<HTMLInputElement>){
+        setErrorMessage('');
+        if(e.target.files && e.target.files[0]){
+            if(e.target.files[0].size > 1500000){
+                setErrorMessage('Image size must be under 1.5MB');
+                e.target.files = null;
+                return;
+            };
+            const reader = new FileReader();
+            reader.readAsDataURL(e.target.files[0]);
+            reader.onloadend = async ()=>{
+                const base64Image = reader.result;
+                if(typeof base64Image === 'string'){
+                    setImage(base64Image);
+                }
+            }
+        }
+    }
+
     const handleSubmit = async function(e: React.FormEvent<HTMLFormElement>){
         e.preventDefault();
+        console.log('submit')
         if(!authState.loggedIn){
             setErrorMessage('Please login to create new post');
             return
         };
-        setDisable(true);
         const tagsArray: string[] = [];
 
         if(title.trim() == '' || content.trim() == ''){
+            setErrorMessage('Fields must not be empty');
             return;
         }
         if(tags != ''){
@@ -50,8 +71,8 @@ function NewPostPage() {
         };
 
         if(tagsArray.length > 5){
-            setErrorMessage('too many tags');
-            return
+            setErrorMessage('Too many tags');
+            return;
         };
 
         const formData = {
@@ -65,12 +86,14 @@ function NewPostPage() {
         };
 
         try{
+            setDisable(true);
             await createNewPost(formData);
             navigate({ to: '/' });
         }catch(error){
             console.log('Error ==> ',error)
         }finally{
-            setDisable(false)
+            setDisable(false);
+            console.log('end')
         }
 
     }
@@ -80,6 +103,22 @@ function NewPostPage() {
             <div className='main'>
                 <h1>Create New Post</h1>
                 <form className='new-post-form' onSubmit={handleSubmit}>
+
+                    <img 
+                        src={image || undefined}
+                        className='image-upload'
+                    />
+                    <label
+                        htmlFor='title'
+                    >
+                        Image (optional)
+                    </label>
+                    <input 
+                        className='image-upload-input'
+                        type='file'
+                        onChange={handleImageUpload}
+                    />
+
                     <label
                         htmlFor='title'
                     >
