@@ -101,19 +101,22 @@ function NewPostPage() {
     return (
         <>
             <div className='main'>
-                <h1>Create New Post</h1>
+                <h2 className='center'>Create New Post</h2>
                 <form className='new-post-form' onSubmit={handleSubmit}>
+                    {
+                        image !=''? <img 
+                            src={image || undefined}
+                            className='image-upload'
+                        />: ''
+                    }
 
-                    <img 
-                        src={image || undefined}
-                        className='image-upload'
-                    />
                     <label
-                        htmlFor='title'
+                        htmlFor='image'
                     >
                         Image (optional)
                     </label>
                     <input 
+                        id='image'
                         className='image-upload-input'
                         type='file'
                         onChange={handleImageUpload}

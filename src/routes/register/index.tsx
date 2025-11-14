@@ -19,9 +19,28 @@ function RouteComponent() {
     const [errorMessage, setErrorMessage] = useState('');
 
     const [complete, setComplete] = useState(false);
+    const [image, setImage] = useState('');
 
     const handleChange = function () {
         setErrorMessage('');
+    }
+
+    const handleProfileUpload = function(e: React.ChangeEvent<HTMLInputElement>){
+        setErrorMessage('');
+        if(e.target.files && e.target.files[0]){
+            if(e.target.files[0].size > 1500000){
+                setErrorMessage('Image must be under 1.5MB');
+                return;
+            }
+            const reader = new FileReader();
+            reader.readAsDataURL(e.target.files[0]);
+            reader.onloadend = async ()=>{
+                const base64Image = reader.result;
+                if(typeof base64Image === 'string'){
+                    setImage(base64Image);
+                }
+            }
+        };
     }
 
     const handleSubmit = async function (e: React.FormEvent<HTMLFormElement>) {
@@ -61,6 +80,24 @@ function RouteComponent() {
                 <h1>Register</h1>
                 {!complete ?
                     <form className='new-post-form' onSubmit={handleSubmit}>
+
+                        <img 
+                            src={image || "blank_profile.jpg"}
+                            className='profile-image-upload'
+                        />
+
+                        <label
+                            htmlFor='profile-image'
+                        >
+                            Profile picture (optional)
+                        </label>
+                        <input 
+                            className='image-upload-input'
+                            id='profile-image'
+                            type='file'
+                            onChange={handleProfileUpload}
+                        />
+
                         <label
                             htmlFor='username'
                         >
