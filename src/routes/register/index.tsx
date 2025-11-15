@@ -21,6 +21,8 @@ function RouteComponent() {
     const [complete, setComplete] = useState(false);
     const [profilePic, setProfilePic] = useState('');
 
+    const [registrating, setRegistrating] = useState(false);
+
     const handleChange = function () {
         setErrorMessage('');
     }
@@ -45,6 +47,7 @@ function RouteComponent() {
 
     const handleSubmit = async function (e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        setRegistrating(true);
         if (password != confirmPassword) {
             setErrorMessage('Passwords do not match');
             return
@@ -68,6 +71,7 @@ function RouteComponent() {
             const res = await registerUser(newUser);
             if(res && res.message ==='User registered successfully'){
                 setComplete(true);
+                setRegistrating(false);
             }else{
                 setErrorMessage(res.error)
                 throw new Error(res);
@@ -83,81 +87,90 @@ function RouteComponent() {
         <>
             <div className='main margin-top-xl'>
                 <h1>Register</h1>
-                {!complete ?
-                    <form className='new-post-form' onSubmit={handleSubmit}>
+                {
+                    registrating===false?
+                    <div>
+                        {!complete ?
+                            <form className='new-post-form' onSubmit={handleSubmit}>
 
-                        <img 
-                            src={profilePic || "blank_profile.jpg"}
-                            className='profile-image-upload'
-                        />
+                                <img 
+                                    src={profilePic || "blank_profile.jpg"}
+                                    className='profile-image-upload'
+                                />
 
-                        <label
-                            htmlFor='profile-image'
-                        >
-                            Profile picture (optional)
-                        </label>
-                        <input 
-                            className='image-upload-input'
-                            id='profile-image'
-                            type='file'
-                            onChange={handleProfileUpload}
-                        />
+                                <label
+                                    htmlFor='profile-image'
+                                >
+                                    Profile picture (optional)
+                                </label>
+                                <input 
+                                    className='image-upload-input'
+                                    id='profile-image'
+                                    type='file'
+                                    onChange={handleProfileUpload}
+                                />
 
-                        <label
-                            htmlFor='username'
-                        >
-                            Username
-                        </label>
-                        <input
-                            id='username'
-                            type='text'
-                            value={username}
-                            onChange={function (e) { setUsername(e.target.value), handleChange() }}
-                        />
+                                <label
+                                    htmlFor='username'
+                                >
+                                    Username
+                                </label>
+                                <input
+                                    id='username'
+                                    type='text'
+                                    value={username}
+                                    onChange={function (e) { setUsername(e.target.value), handleChange() }}
+                                />
 
-                        <label
-                            htmlFor='email'
-                        >
-                            Email
-                        </label>
-                        <input
-                            id='email'
-                            type='email'
-                            value={email}
-                            onChange={function (e) { setEmail(e.target.value), handleChange() }}
-                        />
+                                <label
+                                    htmlFor='email'
+                                >
+                                    Email
+                                </label>
+                                <input
+                                    id='email'
+                                    type='email'
+                                    value={email}
+                                    onChange={function (e) { setEmail(e.target.value), handleChange() }}
+                                />
 
-                        <label
-                            htmlFor='password'
-                        >
-                            Password
-                        </label>
-                        <input
-                            id='password'
-                            type='password'
-                            value={password}
-                            onChange={function (e) { setPassword(e.target.value), handleChange() }}
-                        />
+                                <label
+                                    htmlFor='password'
+                                >
+                                    Password
+                                </label>
+                                <input
+                                    id='password'
+                                    type='password'
+                                    value={password}
+                                    onChange={function (e) { setPassword(e.target.value), handleChange() }}
+                                />
 
-                        <label
-                            htmlFor='confirm-password'
-                        >
-                            Confirm password
-                        </label>
-                        <input
-                            id='confirm-password'
-                            type='password'
-                            value={confirmPassword}
-                            onChange={function (e) { setConfirmPassword(e.target.value), handleChange() }}
-                        />
+                                <label
+                                    htmlFor='confirm-password'
+                                >
+                                    Confirm password
+                                </label>
+                                <input
+                                    id='confirm-password'
+                                    type='password'
+                                    value={confirmPassword}
+                                    onChange={function (e) { setConfirmPassword(e.target.value), handleChange() }}
+                                />
 
-                        <button className='button margin-top' disabled={disable}>REGISTER</button>
-                        <p className='error'>{errorMessage}</p>
-                    </form>
-                    :
-                    <div className='center'>
-                        <p>Registration complete</p>
-                        <Link to='/login' className='blue underline'>Go to Login page</Link>
+                                <button className='button margin-top' disabled={disable}>REGISTER</button>
+                                <p className='error'>{errorMessage}</p>
+                            </form>
+                            :
+                            <div className='center'>
+                                <p>Registration complete</p>
+                                <Link to='/login' className='blue underline'>Go to Login page</Link>
+                            </div>
+                        }
+                    </div>:
+                    <div className='center margin-top-xl'>
+                        <h2 className='center margin-top-xl'>Creating new account....</h2>
+                        <p className='center margin-top-xl'>Free server is slow...</p>
                     </div>
                 }
             </div>

@@ -9,6 +9,11 @@ export type Post = {
     _id: string
     title: string
     content: string
+    author: {
+        username: string
+        email: string
+        profilePic: string
+    }
     img?: {
         url?: string;
         public_id?: string;
@@ -18,7 +23,6 @@ export type Post = {
     dislikes: string[]
     tags: string[]
     createdAt: string
-    username: string
 }
 
 export type NewPost = {

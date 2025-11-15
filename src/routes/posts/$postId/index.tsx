@@ -6,8 +6,6 @@ import { useState, useRef, useEffect } from 'react';
 
 import {singlePost, deletePost, addComment, deleteComment} from '../../../api/posts';
 
-import {grabProfile} from '../../../api/profile';
-
 import { useAuth } from '../../../store/authContext';
 
 import PostStats from '../../../components/PostStats';
@@ -44,19 +42,12 @@ function PostDetailsPage() {
     const [comment, setComment] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
-    const [postAuthor, setPostAuthor] = useState('');
-
     const [, setLikeOrDislike] = useState('');
 
     const { postId } = Route.useParams();
     const {data:post} = useSuspenseQuery(postQueryOptions(postId));
 
     const [commentsList, setCommentsList] = useState(post.comments || [])
-
-    const authorProfile = async function(){
-        const author = await grabProfile(post.username);
-        setPostAuthor(author.profilePic);
-    }
 
     const postDelete = async function(id: string){
         setDisable(true);
@@ -145,7 +136,6 @@ function PostDetailsPage() {
     }, [toggleComment]);
 
     useEffect(()=>{
-        authorProfile();
         refreshComments();
     }, []);
 
@@ -159,14 +149,14 @@ function PostDetailsPage() {
                     </Link>
                 </div>
                 <div className='profile-icon'>
-                    <Link to={'/profile/' + post.username}>
-                        <img src={postAuthor || 'blank_profile.jpg'} />
+                    <Link to={'/profile/' + post.author.username}>
+                        <img src={post.author.profilePic || '/blank_profile.jpg'} />
                     </Link>
                 </div>
                 <div>
                     <p>
-                        <Link to={'/profile/' + post.username}>
-                            {post.username}
+                        <Link to={'/profile/' + post.author.username}>
+                            {post.author.username}
                             <span className='post-time'> - {timeAgo(post.createdAt)}</span>
                         </Link>
                     </p>
@@ -200,7 +190,7 @@ function PostDetailsPage() {
                         email={authState.userData.email}
                     />
                     {
-                        authState.loggedIn && post.username === authState.userData.username?(
+                        authState.loggedIn && post.author.username === authState.userData.username?(
                             <div className='my-flex-end delete-edit-post'>
                                 <button onClick={function(){editPost(post._id)}}>
                                     <FaPenToSquare size={18} />
@@ -253,7 +243,7 @@ function PostDetailsPage() {
             <div className='display-comments'>
                 {commentsList.map((item)=>{
                     return (
-                        <CommentsCard username={item.username} comment={item} key={item.postId + Math.random()} deleteComment={deleteCommentHandler}/>
+                        <CommentsCard profilePic={post.author.profilePic} username={item.username} comment={item} key={item.postId + Math.random()} deleteComment={deleteCommentHandler}/>
                     )
                 })}
             </div>

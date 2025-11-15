@@ -45,6 +45,10 @@ export const AuthProvider = function({children} : {children: any}){
             }else{
                 setLoggedIn(true);
                 setUserData(response.data);
+                setUserData(prev => ({
+                    ...prev,
+                    profilePic: response.data.profilePic
+                }));
             }
         }
         auth();
