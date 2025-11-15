@@ -17,6 +17,7 @@ type ProfileType = {
     createdAt: string,
     profilePic: string,
     lastLogIn: string,
+    posts: []
 }
 
 function RouteComponent() {
@@ -56,8 +57,10 @@ function RouteComponent() {
                 <p>Username: {profile?.username}</p>
                 <p>User since: {timeAgo(profile?.createdAt || '')}</p>
                 <p>Last login: {timeAgo(profile?.lastLogIn || '')}</p>
-                <p>No. of posts: {authState.userData.posts.length}</p>
-                <button className='button margin-top-xl' onClick={logoutFn}>LOGOUT</button>
+                <p>No. of posts: {profile?.posts.length}</p>
+                {
+                    authState.loggedIn?<button className='button margin-top-xl' onClick={logoutFn}>LOGOUT</button>:''
+                }
             </div>
         </>
     )
