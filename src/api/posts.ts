@@ -21,9 +21,14 @@ export const createNewPost = async function(newPost: NewPost): Promise<Post>{
     return res.data;
 }
 
-export const deletePost = async function(postId: string): Promise<void>{
-    const res = await axiosAPI.delete(`posts/${postId}`);
-    return res.data;
+export const deletePost = async function(postId: string): Promise<any>{
+    try{
+        const res = await axiosAPI.delete(`posts/${postId}`);
+        return res.data;
+    }catch(err){
+        const error = err as Error
+        return error;
+    }
 }
 
 export const editPost = async function(newPost: NewPost, id: string): Promise<Post>{
