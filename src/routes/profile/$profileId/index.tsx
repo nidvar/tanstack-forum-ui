@@ -56,6 +56,7 @@ function RouteComponent() {
                 <p>Username: {profile?.username}</p>
                 <p>User since: {timeAgo(profile?.createdAt || '')}</p>
                 <p>Last login: {timeAgo(profile?.lastLogIn || '')}</p>
+                <p>No. of posts: {authState.userData.posts.length}</p>
                 <button className='button margin-top-xl' onClick={logoutFn}>LOGOUT</button>
             </div>
         </>

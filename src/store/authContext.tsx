@@ -6,7 +6,7 @@ type UserData = {
     username: string
     email: string
     profilePic: string
-    postsData: [any]
+    posts: [any]
 };
 
 type AuthContextType = {
@@ -22,7 +22,7 @@ const AuthContext = createContext<AuthContextType>({
         username: "",
         email: "",
         profilePic: "",
-        postsData: [{}]
+        posts: [{}]
     },
     setUserData: function(){},
     setLoggedIn: function(){}
@@ -34,7 +34,7 @@ export const AuthProvider = function({children} : {children: any}){
         username: "",
         email: "",
         profilePic: "",
-        postsData: [{}]
+        posts: [{}]
     });
 
     useEffect(()=>{
