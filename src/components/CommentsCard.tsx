@@ -2,6 +2,7 @@ import { grabProfile } from '../api/profile';
 import { useAuth } from '../store/authContext';
 
 import {useState, useEffect} from 'react';
+import { Link } from '@tanstack/react-router'
 
 import { timeAgo } from '../tools/tools';
 import { FaTrash } from "react-icons/fa6";
@@ -49,7 +50,9 @@ const CommentsCard = function({comment, username, deleteComment}: {comment: Comm
         <>
             <div className='single-comment'>
                 <div className='flex'>
-                    <img src={profile?.profilePic || '/blank_profile.jpg'}  className='single-comment-profile'/>
+                    <Link to={'/profile/' + username}>
+                        <img src={profile?.profilePic || '/blank_profile.jpg'}  className='single-comment-profile'/>
+                    </Link>
                     <div>
                         <p><span className='bold'>{username}</span> - <span className='post-time'>{timeAgo(comment.createdAt || '')}</span></p>
                         <p>{comment.comment}</p>
