@@ -180,9 +180,13 @@ function PostDetailsPage() {
             <div className='main-post post-details'>
                 <div className='post-content'>
                     <h2>{post.title}</h2>
-                    <div className='post-image-upload-container'>
-                        <img src={post.img?.url || undefined} className='post-image-upload'/>
-                    </div>
+                        {
+                            post.img?.url?
+                            <div className='post-image-upload-container'>
+                                <img src={post.img?.url} className='post-image-upload'/>
+                            </div>:
+                            ''
+                        }
                     <p>{post.content}</p>
                 </div>
 
