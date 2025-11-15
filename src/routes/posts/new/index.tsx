@@ -100,69 +100,76 @@ function NewPostPage() {
 
     return (
         <>
-            <div className='main'>
-                <h2 className='center'>Create New Post</h2>
-                <form className='new-post-form' onSubmit={handleSubmit}>
-                    {
-                        image !=''? <img 
-                            src={image || undefined}
-                            className='image-upload'
-                        />: ''
-                    }
+            {
+                disable?
+                <div className='center margin-top-xl'>
+                    <h2 className='center margin-top-xl'>Creating new post....</h2>
+                    <p className='center margin-top-xl'>Free server is slow...</p>
+                </div>:
+                <div className='main'>
+                    <h2 className='center'>Create New Post</h2>
+                    <form className='new-post-form' onSubmit={handleSubmit}>
+                        {
+                            image !=''? <img 
+                                src={image || undefined}
+                                className='image-upload'
+                            />: ''
+                        }
 
-                    <label
-                        htmlFor='image'
-                    >
-                        Image (optional)
-                    </label>
-                    <input 
-                        id='image'
-                        className='image-upload-input'
-                        type='file'
-                        onChange={handleImageUpload}
-                    />
+                        <label
+                            htmlFor='image'
+                        >
+                            Image (optional)
+                        </label>
+                        <input
+                            id='image'
+                            className='image-upload-input'
+                            type='file'
+                            onChange={handleImageUpload}
+                        />
 
-                    <label
-                        htmlFor='title'
-                    >
-                        Title
-                    </label>
-                    <input
-                        id='title'
-                        type='text'
-                        value={title}
-                        onChange={function(e){setTitle(e.target.value); clearError();}}
-                    />
+                        <label
+                            htmlFor='title'
+                        >
+                            Title
+                        </label>
+                        <input
+                            id='title'
+                            type='text'
+                            value={title}
+                            onChange={function(e){setTitle(e.target.value); clearError();}}
+                        />
 
-                    <label
-                        htmlFor='content'
-                    >
-                        Content
-                    </label>
-                    <textarea
-                        id='content'
-                        value={content}
-                        onChange={function(e){setContent(e.target.value); clearError();}}
-                    ></textarea>
+                        <label
+                            htmlFor='content'
+                        >
+                            Content
+                        </label>
+                        <textarea
+                            id='content'
+                            value={content}
+                            onChange={function(e){setContent(e.target.value); clearError();}}
+                        ></textarea>
 
-                    <label
-                        htmlFor='tags'
-                    >
-                        Tags (optional)
-                    </label>
-                    <input
-                        placeholder='comma separated, maximum 5'
-                        id='tags'
-                        type='text'
-                        value={tags}
-                        onChange={function(e){setTags(e.target.value); clearError();}}
-                    />
+                        <label
+                            htmlFor='tags'
+                        >
+                            Tags (optional)
+                        </label>
+                        <input
+                            placeholder='comma separated, maximum 5'
+                            id='tags'
+                            type='text'
+                            value={tags}
+                            onChange={function(e){setTags(e.target.value); clearError();}}
+                        />
 
-                    <button className='button margin-top' disabled={disable}>CREATE</button>
+                        <button className='button margin-top' disabled={disable}>CREATE</button>
 
-                    <p className='error'>{errorMessage}</p>
-                </form>
-            </div>
+                        <p className='error'>{errorMessage}</p>
+                    </form>
+                </div>
+            }
         </>
     )
 }
