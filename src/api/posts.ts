@@ -40,11 +40,12 @@ export const editPost = async function(newPost: NewPost, id: string): Promise<Po
     return res.data;
 }
 
-export const addComment = async function(comment: string, username: string, id: string): Promise<void>{
+export const addComment = async function(comment: string, username: string, id: string, profilePic: string): Promise<void>{
     const res = await axiosAPI.post(`posts/${id}/comment`, {
         comment,
         username,
-        postId: id
+        postId: id,
+        profilePic
     });
     return res.data;
 }

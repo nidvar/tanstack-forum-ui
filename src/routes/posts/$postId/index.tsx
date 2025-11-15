@@ -91,12 +91,13 @@ function PostDetailsPage() {
             return
         };
 
-        await addComment(comment, authState.userData.username, postId);
+        await addComment(comment, authState.userData.username, postId, authState.userData.profilePic);
         const arr= [...post.comments];
         const commentObj = {
             postId,
             comment,
             username: authState.userData.username,
+            profilePic: authState.userData.profilePic
         }
         arr.push(commentObj);
         setComment('')
@@ -243,7 +244,7 @@ function PostDetailsPage() {
             <div className='display-comments'>
                 {commentsList.map((item)=>{
                     return (
-                        <CommentsCard profilePic={post.author.profilePic} username={item.username} comment={item} key={item.postId + Math.random()} deleteComment={deleteCommentHandler}/>
+                        <CommentsCard profilePic={item.profilePic} username={item.username} comment={item} key={item.postId + Math.random()} deleteComment={deleteCommentHandler}/>
                     )
                 })}
             </div>

@@ -1,4 +1,3 @@
-import { grabProfile } from '../api/profile';
 import { useAuth } from '../store/authContext';
 
 import {useState, useEffect} from 'react';
