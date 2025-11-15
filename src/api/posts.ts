@@ -40,7 +40,7 @@ export const editPost = async function(newPost: NewPost, id: string): Promise<Po
     return res.data;
 }
 
-export const addComment = async function(comment: string, username: string, id: string, profilePic: string): Promise<void>{
+export const addComment = async function(comment: string, username: string, id: string, profilePic: string): Promise<any>{
     const res = await axiosAPI.post(`posts/${id}/comment`, {
         comment,
         username,
@@ -63,5 +63,10 @@ export const deleteComment = async function(id: string, postId: string){
     const res = await axiosAPI.post('posts/comment/delete/' + id, {
         postId
     });
+    return res.data;
+}
+
+export const dailyNews = async function(): Promise<any>{
+    const res = await axiosAPI.get<Post[]>(`posts/news`);
     return res.data;
 }

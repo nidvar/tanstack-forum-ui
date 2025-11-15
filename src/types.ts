@@ -7,6 +7,7 @@ export type Comment = {
 }
 
 export type Post = {
+    placement_id?: string
     _id: string
     title: string
     content: string

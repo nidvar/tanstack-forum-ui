@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import React, { useState, useEffect } from 'react';
-import {allPosts} from '../api/posts';
+import {allPosts, dailyNews} from '../api/posts';
 
 import type {Post} from '../types';
 
@@ -13,6 +13,8 @@ export const Route = createFileRoute('/')({
 function App() {
     const [posts, setPosts] = useState<Post[]>([]);
     const [searchedPosts, setSearchedPosts] = useState<Post[]>([]);
+
+    const [news, setNews] = useState<Post[]>([]);
 
     const handleSearch = function(e: React.ChangeEvent<HTMLInputElement>){
         const arr = posts.filter((item)=>{
@@ -40,8 +42,13 @@ function App() {
 
     const loadPosts = async function(){
         const posts = await allPosts();
-        setPosts(posts);
-        setSearchedPosts(posts);
+        const news = await dailyNews();
+
+        const combinedPosts = [...posts, ...news]
+
+        setNews(news);
+        setPosts(combinedPosts);
+        setSearchedPosts(combinedPosts);
     }
 
     useEffect(()=>{
@@ -64,8 +71,6 @@ function App() {
                 >
                     <option value='latest'>Latest</option>
                     <option value='oldest'>Oldest</option>
-                    {/* <option value='commented'>Most Commented</option>
-                    <option value='liked'>Most Liked</option> */}
                 </select>
             </div>
             <div className='posts-list-column'>
@@ -81,8 +86,16 @@ function App() {
                 {
                     searchedPosts.map((item)=>{
                         return(
-                            <React.Fragment key={item._id}>
-                                <PostCard post={item} key={item._id} link={'./posts/' + item._id}/>
+                            <React.Fragment key={item._id? item._id: item.placement_id}>
+                                <PostCard 
+                                    post={item} 
+                                    key={item._id? item._id: item.placement_id} 
+                                    link={
+                                        item.author.email === 'fromnewsapi@newsdata.io'?
+                                        ('./news/' + item._id):
+                                        ('./posts/' + item._id)
+                                    }
+                                />
                                 <div className='horizontal-line'></div>
                             </React.Fragment>
                         )

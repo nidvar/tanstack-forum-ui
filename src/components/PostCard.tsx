@@ -17,11 +17,11 @@ const PostCard = function({post, link}: {post: Post, link: string}){
                 <div>
                     <p>
                         <span className='post-username black'>{post.author.username} -</span>
-                        <span className='post-time'> {timeAgo(post.createdAt)}</span>
+                        <span className='post-time'> {post.createdAt? timeAgo(post.createdAt): ''}</span>
                     </p>
                     <h3>{post.title}</h3>
                     <p>
-                        {post.tags.length > 0? post.tags.map((item, index)=>{ return <span key={post._id + index} className='post-card-tags'>{item}</span> }):'' }
+                        {post.tags?.length > 0? post.tags.map((item, index)=>{ return <span key={post._id + index} className='post-card-tags'>{item}</span> }):'' }
                     </p>
                 </div>
             </Link>
