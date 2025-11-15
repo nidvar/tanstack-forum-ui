@@ -254,6 +254,10 @@ form {
     margin-bottom: 15px;
 }
 
+.post-content p, .post-content h2 {
+    margin: 10px 0;
+}
+
 .post img {
     margin: 0 15px 10px 0;
     width: 80px;
@@ -270,13 +274,16 @@ form {
 
 .post-card-img-thumbnail {
     width: 100px;
+    height: 70px;
     margin-right: 15px;
 }
 
 .post-card-img-thumbnail img{
-    min-height: 100%;
-    min-width: 100%;
+    height: 100%;
+    width: 100%;
     border-radius: 8px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .post-card-img-placeholder {
@@ -307,13 +314,16 @@ form {
 
 .profile-page-img {
     margin: 20px auto;
-    max-height: 250px;
-    max-width: 250px;
-    border-radius: 50%;
+    height: 250px;
+    width: 250px;
 }
 
 .profile-page-img img{
     border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .post-image-upload img{
@@ -321,6 +331,7 @@ form {
 }
 
 .post-image-upload-container {
+    background-color: rgb(36, 36, 36);
     width: 100%;
     display: flex;
     justify-content: center;
