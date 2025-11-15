@@ -1,22 +1,10 @@
-import { Link, useNavigate } from '@tanstack/react-router';
-
-import { logout } from '../api/auth';
+import { Link } from '@tanstack/react-router';
 
 import { useAuth } from '../store/authContext';
 
 const Header = function(){
 
     const authState = useAuth();
-    const navigate = useNavigate();
-
-    const logoutFn = async function(){
-        const result = await logout();
-
-        if(result.message && result.message == 'logged out'){
-            authState.setLoggedIn(false);
-            navigate({ to: '/logout' });
-        }
-    }
 
     return(
         <>
@@ -29,12 +17,11 @@ const Header = function(){
                                 authState.loggedIn? (
                                     <>
                                         <li><Link to='/posts/new'>Create</Link></li>
-                                        <li>
+                                        <div className='profile-icon-header'>
                                             <Link to={"/profile/" + authState.userData.username}>
-                                                {authState.userData.username}
+                                                <img src={authState.userData.profilePic} />
                                             </Link>
-                                        </li>
-                                        <li><button onClick={logoutFn}>Logout</button></li> 
+                                        </div>
                                     </>
                                 ):<li><Link to="/login">Login</Link></li>
                             }
