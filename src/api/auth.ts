@@ -20,7 +20,7 @@ export const registerUser = async function(user: User){
     return result;
 };
 
-export const login = async function(user: User){
+export const login = async function(user: {email: string, password: string}){
     const result = await tryCatch('login', user);
     return result;
 };
