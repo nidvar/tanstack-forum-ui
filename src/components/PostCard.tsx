@@ -10,7 +10,11 @@ const PostCard = function({post, link}: {post: Post, link: string}){
                 <div className='post-card-img-thumbnail'>
                     {
                         post.img?.url? 
-                        <img src={post.img.url} alt={post.title} className='postcard-img'/>: 
+                        <img 
+                            src={post.img.url} 
+                            alt={post.title} 
+                            className='postcard-img'
+                        />: 
                         <div className='post-card-img-placeholder'>📄</div>
                     }
                 </div>
@@ -20,9 +24,9 @@ const PostCard = function({post, link}: {post: Post, link: string}){
                         <span className='post-time'> {post.createdAt? timeAgo(post.createdAt): ''}</span>
                     </p>
                     <h4>{post.title}</h4>
-                    <p>
+                    <div className='tags-container'>
                         {post.tags?.length > 0? post.tags.map((item, index)=>{ return <span key={post._id + index} className='post-card-tags'>{item}</span> }):'' }
-                    </p>
+                    </div>
                 </div>
             </Link>
         </>
