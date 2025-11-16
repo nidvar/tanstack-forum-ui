@@ -331,18 +331,15 @@ form {
     object-position: center;
 }
 
-.post-image-upload img{
-    height:100%;
-}
-
 .post-image-upload-container {
     background-color: rgb(36, 36, 36);
-    width: 100%;
+    max-width: 100%;
     display: flex;
     justify-content: center;
-    height: 400px;
+    height: auto;
     border-radius: 12px;
     margin-bottom: 10px;
+    padding: 0 20px;
 }
 
 /* comment */

@@ -20,7 +20,9 @@ const PostCard = function({post, link}: {post: Post, link: string}){
                 </div>
                 <div>
                     <p>
-                        <span className='post-username black'>{post.author.username} - {post.junk?.creator} - </span>
+                        <span className='post-username black'>
+                            {post.author.username} - {post.junk?.creator? post.junk?.creator + '-': ''} 
+                        </span>
                         <span className='post-time'> {post.createdAt? timeAgo(post.createdAt): ''}</span>
                     </p>
                     <h4>{post.title}</h4>

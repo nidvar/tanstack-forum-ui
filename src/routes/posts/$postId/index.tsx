@@ -182,7 +182,7 @@ function PostDetailsPage() {
                         {
                             post.img?.url?
                             <div className='post-image-upload-container'>
-                                <img src={post.img?.url} className='post-image-upload'/>
+                                <img src={post.img?.url} />
                             </div>:
                             ''
                         }
