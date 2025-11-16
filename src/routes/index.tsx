@@ -49,14 +49,10 @@ function App() {
         loadPosts();
     }, []);
 
-    useEffect(()=>{
-        console.log(posts);
-    }, [posts])
-
     return (
         <div className='main'>
-            <h1>Forum</h1>
-            <p className='center'>React | TypeScript | Node | MongoDB | JWT</p>
+            <h1 className='f40'>Full Stack</h1>
+            <p className='center f16'>React | TypeScript | Node | MongoDB | JWT</p>
             <div className='search-container'>
                 <input 
                     className='search-input'

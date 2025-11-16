@@ -140,11 +140,6 @@ function PostDetailsPage() {
         refreshComments();
     }, []);
 
-    useEffect(()=>{
-        console.log(post);
-    }, [post])
-
-
     return (
         <>
             <div className='post-header'>

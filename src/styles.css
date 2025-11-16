@@ -498,3 +498,11 @@ form {
 .link-color {
     color: #007bff
 }
+
+.f16 {
+    font-size: 16px;
+}
+
+.f40 {
+    font-size: 40px;
+}

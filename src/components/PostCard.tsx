@@ -19,7 +19,7 @@ const PostCard = function({post, link}: {post: Post, link: string}){
                         <span className='post-username black'>{post.author.username} - {post.junk?.creator} - </span>
                         <span className='post-time'> {post.createdAt? timeAgo(post.createdAt): ''}</span>
                     </p>
-                    <h3>{post.title}</h3>
+                    <h4>{post.title}</h4>
                     <p>
                         {post.tags?.length > 0? post.tags.map((item, index)=>{ return <span key={post._id + index} className='post-card-tags'>{item}</span> }):'' }
                     </p>
