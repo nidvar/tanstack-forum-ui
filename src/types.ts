@@ -7,7 +7,6 @@ export type Comment = {
 }
 
 export type Post = {
-    placement_id?: string
     _id: string
     title: string
     content: string
@@ -24,7 +23,8 @@ export type Post = {
     likes: string[]
     dislikes: string[]
     tags: string[]
-    createdAt: string
+    createdAt: string,
+    junk?: any
 }
 
 export type NewPost = {

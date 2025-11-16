@@ -140,6 +140,10 @@ function PostDetailsPage() {
         refreshComments();
     }, []);
 
+    useEffect(()=>{
+        console.log(post);
+    }, [post])
+
 
     return (
         <>
@@ -150,13 +154,21 @@ function PostDetailsPage() {
                     </Link>
                 </div>
                 <div className='profile-icon'>
-                    <Link to={'/profile/' + post.author.username}>
+                    <Link to={
+                        post.junk?.source? 
+                        post.junk?.source:
+                        '/profile/' + post.author.username
+                    } target='_blank'>
                         <img src={post.author.profilePic || '/blank_profile.jpg'} />
                     </Link>
                 </div>
                 <div>
                     <p>
-                        <Link to={'/profile/' + post.author.username}>
+                        <Link to={
+                            post.junk?.source? 
+                            post.junk?.source:
+                            '/profile/' + post.author.username
+                        } target='_blank'>
                             {post.author.username}
                             <span className='post-time'> - {timeAgo(post.createdAt)}</span>
                         </Link>
@@ -171,6 +183,7 @@ function PostDetailsPage() {
             <div className='main-post post-details'>
                 <div className='post-content'>
                     <h2>{post.title}</h2>
+                    <p>By {post.junk?.creator}</p>
                         {
                             post.img?.url?
                             <div className='post-image-upload-container'>
@@ -178,7 +191,7 @@ function PostDetailsPage() {
                             </div>:
                             ''
                         }
-                    <p>{post.content}</p>
+                    <p>{post.content} {post.junk?.link? <Link to={post.junk?.link} target='_blank' className='link-color'>....Read more...</Link>: ''}</p>
                 </div>
 
                 <div className='post-stats-and-icon'>

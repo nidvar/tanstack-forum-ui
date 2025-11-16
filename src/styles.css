@@ -494,3 +494,7 @@ form {
     background-color: rgb(244, 244, 244);
     border-radius: 50%;
 }
+
+.link-color {
+    color: #007bff
+}
