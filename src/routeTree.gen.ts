@@ -16,7 +16,6 @@ import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as ProfileProfileIdIndexRouteImport } from './routes/profile/$profileId/index'
 import { Route as PostsNewIndexRouteImport } from './routes/posts/new/index'
 import { Route as PostsPostIdIndexRouteImport } from './routes/posts/$postId/index'
-import { Route as NewsNewsIdIndexRouteImport } from './routes/news/$newsId/index'
 import { Route as PostsPostIdEditRouteImport } from './routes/posts/$postId/edit'
 
 const IndexRoute = IndexRouteImport.update({
@@ -54,11 +53,6 @@ const PostsPostIdIndexRoute = PostsPostIdIndexRouteImport.update({
   path: '/posts/$postId/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NewsNewsIdIndexRoute = NewsNewsIdIndexRouteImport.update({
-  id: '/news/$newsId/',
-  path: '/news/$newsId/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PostsPostIdEditRoute = PostsPostIdEditRouteImport.update({
   id: '/posts/$postId/edit',
   path: '/posts/$postId/edit',
@@ -71,7 +65,6 @@ export interface FileRoutesByFullPath {
   '/logout': typeof LogoutIndexRoute
   '/register': typeof RegisterIndexRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
-  '/news/$newsId': typeof NewsNewsIdIndexRoute
   '/posts/$postId': typeof PostsPostIdIndexRoute
   '/posts/new': typeof PostsNewIndexRoute
   '/profile/$profileId': typeof ProfileProfileIdIndexRoute
@@ -82,7 +75,6 @@ export interface FileRoutesByTo {
   '/logout': typeof LogoutIndexRoute
   '/register': typeof RegisterIndexRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
-  '/news/$newsId': typeof NewsNewsIdIndexRoute
   '/posts/$postId': typeof PostsPostIdIndexRoute
   '/posts/new': typeof PostsNewIndexRoute
   '/profile/$profileId': typeof ProfileProfileIdIndexRoute
@@ -94,7 +86,6 @@ export interface FileRoutesById {
   '/logout/': typeof LogoutIndexRoute
   '/register/': typeof RegisterIndexRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
-  '/news/$newsId/': typeof NewsNewsIdIndexRoute
   '/posts/$postId/': typeof PostsPostIdIndexRoute
   '/posts/new/': typeof PostsNewIndexRoute
   '/profile/$profileId/': typeof ProfileProfileIdIndexRoute
@@ -107,7 +98,6 @@ export interface FileRouteTypes {
     | '/logout'
     | '/register'
     | '/posts/$postId/edit'
-    | '/news/$newsId'
     | '/posts/$postId'
     | '/posts/new'
     | '/profile/$profileId'
@@ -118,7 +108,6 @@ export interface FileRouteTypes {
     | '/logout'
     | '/register'
     | '/posts/$postId/edit'
-    | '/news/$newsId'
     | '/posts/$postId'
     | '/posts/new'
     | '/profile/$profileId'
@@ -129,7 +118,6 @@ export interface FileRouteTypes {
     | '/logout/'
     | '/register/'
     | '/posts/$postId/edit'
-    | '/news/$newsId/'
     | '/posts/$postId/'
     | '/posts/new/'
     | '/profile/$profileId/'
@@ -141,7 +129,6 @@ export interface RootRouteChildren {
   LogoutIndexRoute: typeof LogoutIndexRoute
   RegisterIndexRoute: typeof RegisterIndexRoute
   PostsPostIdEditRoute: typeof PostsPostIdEditRoute
-  NewsNewsIdIndexRoute: typeof NewsNewsIdIndexRoute
   PostsPostIdIndexRoute: typeof PostsPostIdIndexRoute
   PostsNewIndexRoute: typeof PostsNewIndexRoute
   ProfileProfileIdIndexRoute: typeof ProfileProfileIdIndexRoute
@@ -198,13 +185,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PostsPostIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/news/$newsId/': {
-      id: '/news/$newsId/'
-      path: '/news/$newsId'
-      fullPath: '/news/$newsId'
-      preLoaderRoute: typeof NewsNewsIdIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/posts/$postId/edit': {
       id: '/posts/$postId/edit'
       path: '/posts/$postId/edit'
@@ -221,7 +201,6 @@ const rootRouteChildren: RootRouteChildren = {
   LogoutIndexRoute: LogoutIndexRoute,
   RegisterIndexRoute: RegisterIndexRoute,
   PostsPostIdEditRoute: PostsPostIdEditRoute,
-  NewsNewsIdIndexRoute: NewsNewsIdIndexRoute,
   PostsPostIdIndexRoute: PostsPostIdIndexRoute,
   PostsNewIndexRoute: PostsNewIndexRoute,
   ProfileProfileIdIndexRoute: ProfileProfileIdIndexRoute,
