@@ -90,6 +90,10 @@ form {
     border-radius: 6px;
 }
 
+.filter-select {
+    padding: 6px;
+}
+
 /* header */
 
 .my-header {
