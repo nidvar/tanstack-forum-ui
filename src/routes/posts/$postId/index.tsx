@@ -170,7 +170,9 @@ function PostDetailsPage() {
                     </p>
                     {
                         post.tags.length > 0?
-                        <span className='post-tags'>{post.tags.map((item: any)=> item)}</span>:
+                        <div>
+                            {post.tags.map((item: any)=> <span className='post-tags'>{item}</span>)}
+                        </div>:
                         ''
                     }
                 </div>

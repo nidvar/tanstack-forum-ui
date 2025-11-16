@@ -168,8 +168,10 @@ form {
 }
 
 .post-tags {
+    background-color: rgb(218, 215, 215);
     border-radius: 4px;
-    padding: 4px;
+    padding: 4px 8px;
+    margin-right: 4px;
 }
 
 .post-header {
