@@ -23,7 +23,8 @@ export type Post = {
     likes: string[]
     dislikes: string[]
     tags: string[]
-    createdAt: string,
+    createdAt: string
+    updatedAt: string
     junk?: any
 }
 

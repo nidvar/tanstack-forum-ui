@@ -16,7 +16,7 @@ function App() {
 
     const handleSearch = function(e: React.ChangeEvent<HTMLInputElement>){
         const arr = posts.filter((item)=>{
-            if(item.title.includes(e.target.value)){
+            if(item.title.toLowerCase().includes(e.target.value.toLowerCase())){
                 return true;
             }else{
                 return false;
@@ -26,15 +26,16 @@ function App() {
     };
 
     const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        // Clone the array first
         const arr = [...searchedPosts];
-
+        if(e.target.value === 'commented'){
+            arr.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+        }
         if (e.target.value === 'oldest') {
             arr.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-        } else {
+        }
+        if(e.target.value === 'latest') {
             arr.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
         }
-
         setSearchedPosts(arr);
     };
 
@@ -68,6 +69,7 @@ function App() {
                 >
                     <option value='latest'>Latest</option>
                     <option value='oldest'>Oldest</option>
+                    <option value='commented'>Last commented</option>
                     {/* <option value='commented'>Most Commented</option>
                     <option value='liked'>Most Liked</option> */}
                 </select>
