@@ -1,4 +1,3 @@
-import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 
@@ -41,9 +40,7 @@ if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
     <QueryClientProvider client={queryClient}>
-        <StrictMode>
-            <RouterProvider router={router} />
-        </StrictMode>
+        <RouterProvider router={router} />
     </QueryClientProvider>,
   )
 }
